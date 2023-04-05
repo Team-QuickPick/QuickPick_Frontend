@@ -1,6 +1,6 @@
 #root{
-    width: 40vw;
-    height: auto;
+    width: 400px;
+    height: 100vh;
     border: 1px solid black;
     display: flex;
     justify-content: center;

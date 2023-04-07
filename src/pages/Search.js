@@ -1,6 +1,141 @@
 import React from "react";
 import styles from "./Home.module.scss";
+import Navbar from "../components/Navbar";
+import HomeHeader from "../components/HomeHeader";
+import SearchHeader from "../components/SearchHeader";
 
 export default function Search() {
-  return <div className={styles.container}>search 페이지</div>;
+  return (
+    <>
+      <SearchHeader />
+      <div className={styles.container}>
+        <div className={styles.content}>
+          첫 줄<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          search page<br></br>
+          마지막 줄<br></br>
+        </div>
+      </div>
+      <Navbar />
+    </>
+  );
 }

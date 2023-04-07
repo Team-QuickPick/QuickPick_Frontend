@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./Header.module.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 const DetailHeader = () => {
   const navigate = useNavigate();
@@ -12,7 +14,12 @@ const DetailHeader = () => {
     <header className={styles.container}>
       <div className={styles.contents}>
         <div>
-          <button onClick={handleGoBack}>back</button>
+          <FontAwesomeIcon
+            icon={faArrowLeft}
+            onClick={handleGoBack}
+            size="2x"
+            color="white"
+          />
         </div>
       </div>
     </header>

@@ -1,4 +1,30 @@
-.App {
+body{
+    margin: 0;
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+
+#root{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    height: 100;
+    width: 100%;
+    // border: 1px solid blue;
+
+    // 넓은 화면
+    @media (min-width: 700px) {
+    height: 100%;
+    width: 500px;
+    // border: 1px solid black;
+    }
+} 
 
 

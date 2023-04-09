@@ -10,11 +10,17 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 export default class Navbar extends Component {
+  handleSearchIconClick = () => {
+    if (this.props.onSearchIconClick) {
+      this.props.onSearchIconClick();
+    }
+  };
+
   render() {
     return (
       <nav className={styles.wrapper}>
         <div className={styles.contents}>
-          <Link to="/search">
+          <Link to="/search" onClick={this.handleSearchIconClick}>
             <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" color="white" />
           </Link>
           <Link to="/">

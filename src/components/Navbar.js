@@ -8,11 +8,11 @@ import { faHeart, faHouse, faMagnifyingGlass } from "@fortawesome/free-solid-svg
 export default class Navbar extends Component {
   render() {
     return (
-      <nav className={styles.wrapper}>
+      <nav className={styles.container}>
         <div className={styles.contents}>
-          <Link to="/detail"><FontAwesomeIcon icon={faMagnifyingGlass} size="lg" color="white"/></Link>
-          <Link to="/"><FontAwesomeIcon icon={faHouse} size="lg" color="white"/></Link>
-          <Link to="/"><FontAwesomeIcon icon={faHeart} size="lg" color="white"/></Link>
+          <Link to="/detail"><FontAwesomeIcon icon={faMagnifyingGlass} size="lg" color="black"/></Link>
+          <Link to="/"><FontAwesomeIcon icon={faHouse} size="lg" color="black"/></Link>
+          <Link to="/wishlist"><FontAwesomeIcon icon={faHeart} size="lg" color="black"/></Link>
         </div>
       </nav>
     );

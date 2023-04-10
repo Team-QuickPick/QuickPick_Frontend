@@ -6,14 +6,16 @@ const SelectStore = ({ onStoreSelect }) => {
   const [stores, setStores] = useState([]);
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/v1/stores/").then((response) => {
+    const fetchData = async () => {
+      const response = await axios.get("http://127.0.0.1:8000/api/v1/stores/");
       const data = response.data;
-      const stores = {};
-      data.forEach((store, index) => {
-        stores[`store${index + 1}`] = store.name;
-      });
+      const stores = data.reduce((acc, store, index) => {
+        acc[`store${index + 1}`] = store.name;
+        return acc;
+      }, {});
       setStores(stores);
-    });
+    };
+    fetchData();
   }, []);
 
   const handleChange = (event) => {

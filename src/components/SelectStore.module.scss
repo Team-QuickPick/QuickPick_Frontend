@@ -1,12 +1,14 @@
-// SelectStore.module.scss
 .selectStoreWrapper {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-  
-  select {
-    font-size: 16px;
-    padding: 5px;
-  }
-  
+  display: flex;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+select {
+  font-size: 16px;
+  padding: 5px;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+}

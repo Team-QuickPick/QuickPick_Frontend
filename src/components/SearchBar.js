@@ -1,4 +1,3 @@
-// SearchBar.js
 import React, { useState } from "react";
 import Modal from "react-modal";
 import { useEffect } from "react";

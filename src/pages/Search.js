@@ -37,7 +37,7 @@ export default function Search() {
       price: "20000",
       image:
         "https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018232405ko.jpg?l=ko",
-      product_location: "2",
+      product_location: "올리브영 신사점",
     },
     {
       id: 3,
@@ -45,7 +45,7 @@ export default function Search() {
       price: "30000",
       image:
         "https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0018/A00000018053216ko.jpg?l=ko  ",
-      product_location: "3",
+      product_location: "올리브영 신사점",
     },
     {
       id: 4,
@@ -53,7 +53,7 @@ export default function Search() {
       price: "22000",
       image:
         "https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0013/A00000013906322ko.jpg?l=ko",
-      product_location: "4",
+      product_location: "올리브영 오즈점",
     },
     {
       id: 5,
@@ -61,7 +61,7 @@ export default function Search() {
       price: "15000",
       image:
         "https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0016/A00000016321805ko.jpg?l=ko",
-      product_location: "1",
+      product_location: "올리브영 인천 연수점",
     },
 
     {
@@ -70,7 +70,7 @@ export default function Search() {
       price: "10000",
       image:
         "https://image.oliveyoung.co.kr/uploads/images/goods/400/10/0000/0014/A00000014913523ko.jpg?l=ko",
-      product_location: "2",
+      product_location: "올리브영 피치점",
     },
   ];
 
@@ -104,7 +104,28 @@ export default function Search() {
 
     setSearchResults(results);
     setSearchPerformed(true);
+
+    // 최근 검색어에 추가
+    const recentSearches =
+      JSON.parse(localStorage.getItem("recentSearches")) || [];
+    const updatedSearches = [
+      searchTerm,
+      ...recentSearches.filter((keyword) => keyword !== searchTerm),
+    ];
+    setRecentSearches(updatedSearches);
+    localStorage.setItem(
+      "recentSearches",
+      JSON.stringify(updatedSearches.slice(0, 5))
+    );
   };
+
+  const [recentSearches, setRecentSearches] = useState([]);
+
+  useEffect(() => {
+    const recentSearches =
+      JSON.parse(localStorage.getItem("recentSearches")) || [];
+    setRecentSearches(recentSearches);
+  }, []);
 
   useEffect(() => {
     if (searchPerformed) {
@@ -148,21 +169,21 @@ export default function Search() {
       <div className={styles.container}>
         <div className={styles.content}>
           <div>
-            <SelectStore onStoreSelect={handleStoreSelect} stores={stores} />
             <SearchBar onSearch={handleSearch} resetInput={resetInput} />
             {!searchPerformed ? (
               <div>
                 <div className={styles.searchKeyword}>
                   <div className={styles.searchKeywordTitle}>최근 검색어</div>
                   <div className={styles.searchKeywordList}>
-                    <div
-                      className={styles.searchKeywordItem}
-                      onClick={() =>
-                        handleKeywordClick(getRandomArrayElement(data).name)
-                      }
-                    >
-                      {getRandomArrayElement(data).name}
-                    </div>
+                    {recentSearches.map((keyword, index) => (
+                      <div
+                        key={index}
+                        className={styles.searchKeywordItem}
+                        onClick={() => handleKeywordClick(keyword)}
+                      >
+                        {keyword}
+                      </div>
+                    ))}
                   </div>
                 </div>
                 <div className={styles.searchKeyword}>
@@ -172,7 +193,7 @@ export default function Search() {
                       <div
                         key={index}
                         className={styles.searchKeywordItem}
-                        onClick={() => handleKeywordClick(name)}
+                        // onClick={() => handleKeywordClick(name)}
                       >
                         {name}
                       </div>
@@ -204,6 +225,7 @@ export default function Search() {
           </div>
         </div>
       </div>
+      <SelectStore onStoreSelect={handleStoreSelect} stores={stores} />
       <Navbar onSearchIconClick={resetSearch} />
     </>
   );

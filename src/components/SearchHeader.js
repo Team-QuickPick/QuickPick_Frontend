@@ -6,7 +6,7 @@ export default class SearchHeader extends Component {
     return (
       <header className={styles.container}>
         <div className={styles.contents}>
-          <div>검색페이지</div>
+          <div className={styles.text}>search page</div>
         </div>
       </header>
     );

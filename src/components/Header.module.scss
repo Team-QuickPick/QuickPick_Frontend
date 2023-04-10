@@ -8,6 +8,10 @@
     align-items: center;
     padding-left: 10px;
 
+    .text{
+      color: white;
+    }
+
     // 데스크탑
     @media (min-width: 700px) {
       width: 500px;

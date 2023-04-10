@@ -15,7 +15,7 @@ function SideButton() {
     }
   
     useEffect(() => {
-      console.log("ScrollY is ", ScrollY); // ScrollY가 변화할때마다 값을 콘솔에 출력
+    //   console.log("ScrollY is ", ScrollY); // ScrollY가 변화할때마다 값을 콘솔에 출력
     }, [ScrollY])
   
     useEffect(() => {
@@ -33,9 +33,9 @@ function SideButton() {
     }
 return(
         <div className={styles.container} onClick={MoveToTop} style={displayStyle}>
-            <button className={styles.upBtn}>
+            <div className={styles.upBtn}>
                 <FontAwesomeIcon icon={faArrowCircleUp} size="2x" color="black"/>
-            </button>
+            </div>
         </div>
     );
 }

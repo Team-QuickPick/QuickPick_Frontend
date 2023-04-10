@@ -4,6 +4,7 @@
     height: 50px;
     position: fixed;
     top: 0;
+    z-index: 999;
 
     // 데스크탑
     @media (min-width: 700px) {

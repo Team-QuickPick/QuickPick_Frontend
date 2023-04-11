@@ -1,0 +1,21 @@
+.container{
+  position: fixed;
+  bottom: 10vh;
+  right: 10vw;
+  z-index: 999;
+}
+.upBtn{
+  border: 2px solid white;
+  background-color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  .active {
+      z-index: 10;
+      opacity: 1;
+    }
+    :hover,
+    :focus,
+    :active {
+      outline: 0 none;
+    }
+}

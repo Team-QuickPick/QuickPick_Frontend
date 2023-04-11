@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import styles from "./Navbar.module.scss";
 import { Link } from "react-router-dom";
@@ -10,7 +9,6 @@ import {
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 
-
 export default class Navbar extends Component {
   handleSearchIconClick = () => {
     if (this.props.onSearchIconClick) {
@@ -20,20 +18,20 @@ export default class Navbar extends Component {
 
   render() {
     return (
-      <nav className={styles.wrapper}>
+      <nav className={styles.container}>
         <div className={styles.contents}>
           <Link to="/search" onClick={this.handleSearchIconClick}>
             <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" color="white" />
           </Link>
+
           <Link to="/">
-            <FontAwesomeIcon icon={faHouse} size="lg" color="white" />
+            <FontAwesomeIcon icon={faHouse} size="lg" color="black" />
           </Link>
-          <Link to="/">
-            <FontAwesomeIcon icon={faHeart} size="lg" color="white" />
+          <Link to="/wishlist">
+            <FontAwesomeIcon icon={faHeart} size="lg" color="black" />
           </Link>
         </div>
       </nav>
     );
   }
 }
-

@@ -6,7 +6,6 @@ import HomeHeader from "../components/HomeHeader";
 
 export default function Home() {
   return (
-
     <>
       <HomeHeader />
       <div className={styles.container}>
@@ -138,6 +137,5 @@ export default function Home() {
       </div>
       <Navbar />
     </>
-
   );
 }

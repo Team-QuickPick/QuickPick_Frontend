@@ -6,7 +6,7 @@ export default class HomeHeader extends Component {
     return (
       <header className={styles.container}>
         <div className={styles.contents}>
-          <div>로고</div>
+          <img className={styles.logoImg} src="img/Logo.png" />
         </div>
       </header>
     );

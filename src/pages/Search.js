@@ -180,6 +180,7 @@ export default function Search() {
                       <img src={result.image} className={styles.image} />
                       <div className={styles.productInfo}>
                         <div>{result.name}</div>
+                        <div>{result.id}</div>
                         <div>{result.price}</div>
                         {/* <div>{result.product_location}</div> */}
                       </div>

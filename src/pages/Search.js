@@ -2,33 +2,43 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
+import { useQuery } from "react-query";
 
 import styles from "./Search.module.scss";
 import Navbar from "../components/Navbar";
 import SearchHeader from "../components/SearchHeader";
 import SearchBar from "../components/SearchBar";
 import SelectStore from "../components/SelectStore";
+import { fetchProducts, fetchStores } from "../utils/fetchData";
 
 export default function Search() {
   // 매장 데이터
-  const [stores, setStores] = useState([]);
+  const { data: storeData, isLoading: storeIsLoading } = useQuery(
+    "stores",
+    fetchStores
+  );
+  const [stores, setStores] = useState({});
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/v1/stores/").then((response) => {
-      const data = response.data;
-      const stores = {};
-      data.forEach((store, index) => {
-        stores[store.pk] = store.name;
+    if (storeData) {
+      const newStores = {};
+      storeData.forEach((store) => {
+        newStores[store.pk] = store.name;
       });
-      setStores(stores);
-    });
-  }, []);
+      setStores(newStores);
+    }
+  }, [storeData]);
 
+  // 상품 데이터
+  const { data: productData, isLoading: productIsLoading } = useQuery(
+    "products",
+    fetchProducts
+  );
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/v1/products/").then((response) => {
-      const apiData = response.data.map((item) => ({
+    if (productData && stores) {
+      const apiData = productData.map((item) => ({
         id: item.pk,
         name: item.name,
         price: item.price,
@@ -38,9 +48,8 @@ export default function Search() {
         ),
       }));
       setData(apiData);
-      console.log(apiData);
-    });
-  }, [stores]);
+    }
+  }, [productData, stores]);
 
   const [searchResults, setSearchResults] = useState([]);
   const [searchPerformed, setSearchPerformed] = useState(false);

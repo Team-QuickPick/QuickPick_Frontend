@@ -1,9 +1,9 @@
 import React from "react";
-import styles from "./Home.module.scss";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
+import styles from "./Home.module.scss";
 import DetailHeader from "../components/DetailHeader";
 import Navbar from "../components/Navbar";
 

@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.scss";
 
 import Home from "./pages/Home";
@@ -10,7 +10,7 @@ import SideButton from "./components/SideButton";
 
 function App() {
   return (
-    <>
+    <Router>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
@@ -19,7 +19,7 @@ function App() {
         <Route path="/wishlist" element={<WishList />} />
       </Routes>
       <SideButton />
-    </>
+    </Router>
   );
 }
 

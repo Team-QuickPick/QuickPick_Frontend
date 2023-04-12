@@ -1,12 +1,13 @@
 import React from "react";
+import { useState, useEffect } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
+
 import styles from "./Search.module.scss";
 import Navbar from "../components/Navbar";
 import SearchHeader from "../components/SearchHeader";
 import SearchBar from "../components/SearchBar";
-import { useState, useEffect } from "react";
 import SelectStore from "../components/SelectStore";
-import axios from "axios";
-import { Link } from "react-router-dom";
 
 export default function Search() {
   // 매장 데이터
@@ -45,12 +46,31 @@ export default function Search() {
   const [searchPerformed, setSearchPerformed] = useState(false);
   const [selectedStore, setSelectedStore] = useState("");
   const [inputValue, setInputValue] = useState("");
+
   const handleStoreSelect = (selectedStoreKey) => {
     // 추가
     setSelectedStore(selectedStoreKey);
+    navigate(location.pathname, {
+      state: { ...location.state, selectedStore: selectedStoreKey },
+    });
   };
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state) {
+      setSearchResults(location.state.searchResults);
+      setSearchPerformed(location.state.searchPerformed);
+    }
+  }, []);
+
   const handleSearch = (searchTerm) => {
+    // 검색 결과를 location 객체에 저장
+    navigate(location.pathname, {
+      state: { searchResults, searchPerformed: true },
+    });
+
     setInputValue(searchTerm);
     if (selectedStore === "") {
       alert("먼저 매장을 선택하세요.");
@@ -62,7 +82,7 @@ export default function Search() {
     // 선택된 매장 이름 가져오기
     const selectedStoreName = stores[selectedStore];
 
-    // 검색 기능 구현
+    // 검색 기능
     const results = data.filter(
       (item) =>
         item.name.toLowerCase().includes(searchTerm.toLowerCase()) &&

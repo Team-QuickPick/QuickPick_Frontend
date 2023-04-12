@@ -1,14 +1,141 @@
 import React from "react";
 import styles from "./Home.module.scss";
 
+import Navbar from "../components/Navbar";
 import DetailHeader from "../components/DetailHeader";
 
 export default function Detail() {
   return (
-    <div className={styles.container}>
+    <>
       <DetailHeader />
-      detail page
-      <br />
-    </div>
+      <div className={styles.container}>
+        <div className={styles.content}>
+          첫 줄<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          detail page<br></br>
+          마지막 줄<br></br>
+        </div>
+      </div>
+      <Navbar />
+    </>
   );
 }

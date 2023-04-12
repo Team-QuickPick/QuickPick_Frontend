@@ -1,8 +1,10 @@
 .container {
-  background-color: #ADD7F6;
+  // background-color: #ADD7F6;
+  // opacity: 0.5;
   width: 100%;
   height: 50px;
-  border-top: 1px solid black;
+  background-color: white;
+  box-shadow: 0 0 3px #ADD7F6 ;
   position: fixed;
   bottom: 0;
 

@@ -32,11 +32,13 @@ function SideButton() {
         display: ScrollY > 0 ? 'block' :'none'
     }
 return(
-        <div className={styles.container} onClick={MoveToTop} style={displayStyle}>
-            <div className={styles.upBtn}>
+    <div  className={styles.container}>
+        <div style={displayStyle}  className={styles.contents}>
+            <div className={styles.upBtn}  onClick={MoveToTop}>
                 <FontAwesomeIcon icon={faArrowCircleUp} size="2x" color="black"/>
             </div>
         </div>
+    </div>
     );
 }
 

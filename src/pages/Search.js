@@ -6,6 +6,7 @@ import SearchBar from "../components/SearchBar";
 import { useState, useEffect } from "react";
 import SelectStore from "../components/SelectStore";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function Search() {
   // 매장 데이터
@@ -175,16 +176,20 @@ export default function Search() {
                   총 {searchResults.length}건의 상품이 검색되었습니다.
                 </div>
                 <div className={styles.productsContainer}>
+                  {/* 상품을 렌더링 하는 부분 */}
                   {searchResults.map((result, index) => (
-                    <div key={index} className={styles.product}>
-                      <img src={result.image} className={styles.image} />
-                      <div className={styles.productInfo}>
-                        <div>{result.name}</div>
-                        <div>{result.id}</div>
-                        <div>{result.price}</div>
-                        {/* <div>{result.product_location}</div> */}
+                    <Link to={`/detail/${result.id}`} key={index}>
+                      <div key={index} className={styles.product}>
+                        <img src={result.image} className={styles.image} />
+                        <div className={styles.productInfo}>
+                          <div>{result.name}</div>
+                          <div>{result.pk}</div>
+                          <div>{result.id}</div>
+                          <div>{result.price}</div>
+                          {/* <div>{result.product_location}</div> */}
+                        </div>
                       </div>
-                    </div>
+                    </Link>
                   ))}
                 </div>
               </>

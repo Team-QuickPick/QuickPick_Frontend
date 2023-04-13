@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./Home.module.scss";
 
-import DetailHeader from "../components/DetailHeader";
 import Navbar from "../components/Navbar";
+import DetailHeader from "../components/DetailHeader";
 
 export default function Detail() {
   return (

@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
+
 import styles from "./Home.module.scss";
 import Navbar from "../components/Navbar";
 import HomeHeader from "../components/HomeHeader";
 import axios from "axios";
+import { Link } from "react-router-dom";
 export default function Home() {
   // 광고 캐러셀
   const adContainerRef = useRef(null);
@@ -22,13 +24,14 @@ export default function Home() {
       activeSlide * adInnerRef.current.offsetWidth
     }px)`;
   }, [activeSlide]);
+
   // 인기 상품
   const [popularProductList, setPopularProductList] = useState([]);
   const [loading, setLoading] = useState(false);
   const fetchPopularProductHandler = async () => {
     try {
       const result = await axios.get("http://127.0.0.1:8000/api/v1/products/");
-      console.log(result);
+      // console.log(result);
       if (result) {
         setPopularProductList(result.data);
         setLoading(false);
@@ -37,11 +40,13 @@ export default function Home() {
       console.log("인기 상품 데이터 조회 실패", error.message);
     }
   };
+
   useEffect(() => {
     setLoading(true);
     fetchPopularProductHandler();
     setLoading(false);
   }, []);
+
   return (
     <>
       <HomeHeader />
@@ -87,9 +92,11 @@ export default function Home() {
             {popularProductList.slice(0, 10).map((item, index) => {
               return (
                 <div className={styles.bestItems}>
-                  <div className={styles.bestImg}>{item.image}이미지</div>
-                  <div className={styles.bestName}>{item.name}</div>
-                  <div className={styles.bestPrice}>{item.price}</div>
+                  <Link to="/detail">
+                    <div className={styles.bestImg}>{item.image}이미지</div>
+                    <div className={styles.bestName}>{item.name}</div>
+                    <div className={styles.bestPrice}>{item.price}</div>
+                  </Link>
                 </div>
               );
             })}

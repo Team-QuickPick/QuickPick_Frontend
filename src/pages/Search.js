@@ -1,32 +1,44 @@
 import React from "react";
+import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useQuery } from "react-query";
+
 import styles from "./Search.module.scss";
 import Navbar from "../components/Navbar";
 import SearchHeader from "../components/SearchHeader";
 import SearchBar from "../components/SearchBar";
-import { useState, useEffect } from "react";
 import SelectStore from "../components/SelectStore";
-import axios from "axios";
+import { fetchProducts, fetchStores } from "../utils/fetchData";
+import Product from "../components/Product";
 
 export default function Search() {
   // 매장 데이터
-  const [stores, setStores] = useState([]);
+  const { data: storeData, isLoading: storeIsLoading } = useQuery(
+    "stores",
+    fetchStores
+  );
+  const [stores, setStores] = useState({});
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/v1/stores/").then((response) => {
-      const data = response.data;
-      const stores = {};
-      data.forEach((store, index) => {
-        stores[store.pk] = store.name;
+    if (storeData) {
+      const newStores = {};
+      storeData.forEach((store) => {
+        newStores[store.pk] = store.name;
       });
-      setStores(stores);
-    });
-  }, []);
+      setStores(newStores);
+    }
+  }, [storeData]);
 
+  // 상품 데이터
+  const { data: productData, isLoading: productIsLoading } = useQuery(
+    "products",
+    fetchProducts
+  );
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/v1/products/").then((response) => {
-      const apiData = response.data.map((item) => ({
+    if (productData && stores) {
+      const productsData = productData.map((item) => ({
         id: item.pk,
         name: item.name,
         price: item.price,
@@ -35,21 +47,39 @@ export default function Search() {
           (storePk) => stores[storePk]
         ),
       }));
-      setData(apiData);
-      console.log(apiData);
-    });
-  }, [stores]);
+      setData(productsData);
+    }
+  }, [productData, stores]);
 
   const [searchResults, setSearchResults] = useState([]);
   const [searchPerformed, setSearchPerformed] = useState(false);
   const [selectedStore, setSelectedStore] = useState("");
   const [inputValue, setInputValue] = useState("");
+
   const handleStoreSelect = (selectedStoreKey) => {
     // 추가
     setSelectedStore(selectedStoreKey);
+    navigate(location.pathname, {
+      state: { ...location.state, selectedStore: selectedStoreKey },
+    });
   };
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state) {
+      setSearchResults(location.state.searchResults);
+      setSearchPerformed(location.state.searchPerformed);
+    }
+  }, []);
+
   const handleSearch = (searchTerm) => {
+    // 검색 결과를 location 객체에 저장
+    navigate(location.pathname, {
+      state: { searchResults, searchPerformed: true },
+    });
+
     setInputValue(searchTerm);
     if (selectedStore === "") {
       alert("먼저 매장을 선택하세요.");
@@ -61,7 +91,7 @@ export default function Search() {
     // 선택된 매장 이름 가져오기
     const selectedStoreName = stores[selectedStore];
 
-    // 검색 기능 구현
+    // 검색 기능
     const results = data.filter(
       (item) =>
         item.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
@@ -113,10 +143,6 @@ export default function Search() {
       setResetInput(false);
     }
   }, [resetInput]);
-
-  const getRandomArrayElement = (arr) => {
-    return arr[Math.floor(Math.random() * arr.length)];
-  };
 
   // 중복 없이 랜덤한 배열 요소를 n개 반환하는 함수
   const getRandomArrayElements = (arr, n) => {
@@ -176,15 +202,7 @@ export default function Search() {
                 </div>
                 <div className={styles.productsContainer}>
                   {searchResults.map((result, index) => (
-                    <div key={index} className={styles.product}>
-                      <img src={result.image} className={styles.image} />
-                      <div className={styles.productInfo}>
-                        <div>{result.name}</div>
-                        <div>{result.id}</div>
-                        <div>{result.price}</div>
-                        {/* <div>{result.product_location}</div> */}
-                      </div>
-                    </div>
+                    <Product key={index} product={result} />
                   ))}
                 </div>
               </>

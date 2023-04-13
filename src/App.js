@@ -23,7 +23,6 @@ function App() {
       </Routes>
       <SideButton />
       <Footer />
-    </>
     </Router>
   );
 }

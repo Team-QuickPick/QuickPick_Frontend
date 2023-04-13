@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.scss";
 
 import Home from "./pages/Home";
@@ -12,12 +12,11 @@ import Footer from "./components/Footer";
 
 function App() {
   return (
-    <>
+    <Router>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/detail" element={<Detail />} />
-        <Route path="/detail/1" element={<div> 1번째 제품 상세페이지 </div>} />
+        <Route path="/detail/:id" element={<Detail />} />
         <Route path="/search" element={<Search />} />
         <Route path="/recent" element={<Recent />} />
         <Route path="/wishlist" element={<WishList />} />
@@ -25,6 +24,7 @@ function App() {
       <SideButton />
       <Footer />
     </>
+    </Router>
   );
 }
 

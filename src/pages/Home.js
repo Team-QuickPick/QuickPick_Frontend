@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+
 import styles from "./Home.module.scss";
 import Navbar from "../components/Navbar";
 import HomeHeader from "../components/HomeHeader";
@@ -46,7 +47,6 @@ export default function Home() {
     setLoading(false);
   }, []);
 
-  
   return (
     <>
       <HomeHeader />
@@ -89,9 +89,9 @@ export default function Home() {
           <div className={styles.text}>인기 상품</div>
           {/* get 요청 */}
           <div className={styles.bestContainer}>
-            {popularProductList.slice(0,10).map((item, index) => {
-                return (
-                  <div className={styles.bestItems}>
+            {popularProductList.slice(0, 10).map((item, index) => {
+              return (
+                <div className={styles.bestItems}>
                   <Link to="/detail">
                     <div className={styles.bestImg}>{item.image}이미지</div>
                     <div className={styles.bestName}>{item.name}</div>
@@ -102,7 +102,6 @@ export default function Home() {
             })}
           </div>
         </div>
-
       </div>
       <Navbar />
     </>

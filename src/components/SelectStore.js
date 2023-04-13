@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./SelectStore.module.scss";
+
 const SelectStore = ({ onStoreSelect }) => {
   const [stores, setStores] = useState([]);
+
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get("http://127.0.0.1:8000/api/v1/stores/");
@@ -16,9 +18,11 @@ const SelectStore = ({ onStoreSelect }) => {
     };
     fetchData();
   }, []);
+
   const handleChange = (event) => {
     onStoreSelect(event.target.value);
   };
+
   return (
     <div className={styles.selectStoreWrapper}>
       <select onChange={handleChange}>
@@ -32,4 +36,5 @@ const SelectStore = ({ onStoreSelect }) => {
     </div>
   );
 };
+
 export default SelectStore;

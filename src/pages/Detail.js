@@ -5,6 +5,7 @@ import axios from "axios";
 
 import styles from "./Home.module.scss";
 import DetailHeader from "../components/DetailHeader";
+import Navbar from "../components/Navbar";
 
 export default function Detail() {
   const { id } = useParams();

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faHeart,
+  faClockRotateLeft,
   faHouse,
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
@@ -21,14 +21,13 @@ export default class Navbar extends Component {
       <nav className={styles.container}>
         <div className={styles.contents}>
           <Link to="/search" onClick={this.handleSearchIconClick}>
-            <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" color="white" />
+            <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" color="black" />
           </Link>
-
           <Link to="/">
             <FontAwesomeIcon icon={faHouse} size="lg" color="black" />
           </Link>
-          <Link to="/wishlist">
-            <FontAwesomeIcon icon={faHeart} size="lg" color="black" />
+          <Link to="/recent">
+            <FontAwesomeIcon icon={faClockRotateLeft} size="lg" color="black" />
           </Link>
         </div>
       </nav>

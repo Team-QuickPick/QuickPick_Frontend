@@ -5,8 +5,10 @@ import Home from "./pages/Home";
 import Detail from "./pages/Detail";
 import Search from "./pages/Search";
 import WishList from "./pages/WishList";
+import Recent from "./pages/Recent";
 
 import SideButton from "./components/SideButton";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -16,9 +18,12 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/recent" element={<Recent />} />
         <Route path="/wishlist" element={<WishList />} />
       </Routes>
       <SideButton />
+      <Footer />
+    </>
     </Router>
   );
 }

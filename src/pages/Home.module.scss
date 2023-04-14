@@ -13,7 +13,6 @@
     display: flex;
     align-items: center;
     background-color: white;
-    // box-shadow: 0 0 1px #ADD7F6 ;
     margin: 2px 0;
 
     width: 300%;
@@ -27,7 +26,7 @@
       justify-content: center;
       
       img{
-        height: 70vh;
+        height: auto;
         max-width: 100%;
         box-shadow: 0 0 3px #3B28CC;
 

@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-
 import styles from "./Home.module.scss";
 import Navbar from "../components/Navbar";
 import HomeHeader from "../components/HomeHeader";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import Modal from "../components/Modal";
+
 export default function Home() {
   // 광고 캐러셀
   const adContainerRef = useRef(null);
@@ -13,6 +13,8 @@ export default function Home() {
   const button2Ref = useRef(null);
   const button3Ref = useRef(null);
   const [activeSlide, setActiveSlide] = useState(0);
+  const [showModal, setShowModal] = useState(false);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveSlide((prevSlide) => (prevSlide + 1) % 3);
@@ -25,8 +27,15 @@ export default function Home() {
     }px)`;
   }, [activeSlide]);
 
+  useEffect(() => {
+    setLoading(true);
+    fetchPopularProductHandler();
+    setLoading(false);
+  }, []);
+
   // 인기 상품
   const [popularProductList, setPopularProductList] = useState([]);
+  const [focusedItem, setFocusedItem] = useState({});
   const [loading, setLoading] = useState(false);
   const fetchPopularProductHandler = async () => {
     try {
@@ -40,12 +49,13 @@ export default function Home() {
       console.log("인기 상품 데이터 조회 실패", error.message);
     }
   };
-
-  useEffect(() => {
-    setLoading(true);
-    fetchPopularProductHandler();
-    setLoading(false);
-  }, []);
+  // 모달
+  const openModal = (item) => {
+    setFocusedItem(item);
+    setShowModal(true);
+  };
+  
+  
 
   return (
     <>
@@ -56,7 +66,7 @@ export default function Home() {
           {/* 캐러셀 */}
           <div className={styles.adContainer} ref={adContainerRef}>
             <div className={styles.adInner} ref={adInnerRef}>
-              <img alt="Ad1" src="img/HomeAd1.png" />
+              <img alt="Ad1" src="img/HomeAd1.jpg" />
             </div>
             <div className={styles.adInner}>
               <img alt="Ad2" src="img/HomeAd2.jpg" />
@@ -91,17 +101,16 @@ export default function Home() {
           <div className={styles.bestContainer}>
             {popularProductList.slice(0, 10).map((item, index) => {
               return (
-                <div className={styles.bestItems}>
-                  <Link to="/detail">
-                    <div className={styles.bestImg}>{item.image}이미지</div>
-                    <div className={styles.bestName}>{item.name}</div>
-                    <div className={styles.bestPrice}>{item.price}</div>
-                  </Link>
+                <div key={`popularProduct${item.name}${index}`} className={styles.bestItems} onClick={()=>{openModal(item)}}>
+                  <div className={styles.bestImg}>{item.image}이미지</div>
+                  <div className={styles.bestName}>{item.name}</div>
+                  <div className={styles.bestPrice}>{item.price}</div>
                 </div>
               );
             })}
           </div>
         </div>
+        <Modal showModal={showModal} setShowModal={setShowModal} renderItem={focusedItem} />
       </div>
       <Navbar />
     </>

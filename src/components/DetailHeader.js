@@ -7,7 +7,7 @@ const DetailHeader = () => {
   const navigate = useNavigate();
 
   const handleGoBack = () => {
-    navigate(-1, { replace: true });
+    navigate(-1);
   };
 
   return (

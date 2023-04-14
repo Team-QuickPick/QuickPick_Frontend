@@ -12,6 +12,17 @@ import { fetchProducts, fetchStores } from "../utils/fetchData";
 import Product from "../components/Product";
 
 export default function Search() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state) {
+      setSearchResults(location.state.searchResults);
+      setSearchPerformed(location.state.searchPerformed);
+      setSelectedStore(location.state.selectedStore);
+      setInputValue(location.state.inputValue);
+    }
+  }, [location]);
   // 매장 데이터
   const { data: storeData, isLoading: storeIsLoading } = useQuery(
     "stores",
@@ -57,15 +68,11 @@ export default function Search() {
   const [inputValue, setInputValue] = useState("");
 
   const handleStoreSelect = (selectedStoreKey) => {
-    // 추가
     setSelectedStore(selectedStoreKey);
-    navigate(location.pathname, {
-      state: { ...location.state, selectedStore: selectedStoreKey },
-    });
+    if (searchPerformed) {
+      handleSearch(inputValue);
+    }
   };
-
-  const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
     if (location.state) {
@@ -75,9 +82,19 @@ export default function Search() {
   }, []);
 
   const handleSearch = (searchTerm) => {
+    if (selectedStore === "") {
+      alert("먼저 매장을 선택하세요.");
+      return;
+    }
+
     // 검색 결과를 location 객체에 저장
     navigate(location.pathname, {
-      state: { searchResults, searchPerformed: true },
+      state: {
+        searchResults,
+        searchPerformed: true,
+        selectedStore,
+        inputValue: searchTerm,
+      },
     });
 
     setInputValue(searchTerm);

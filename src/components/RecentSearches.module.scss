@@ -1,0 +1,21 @@
+.recentSearchesContainer {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .recentSearchItem {
+    padding: 0.5rem 1rem;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    font-size: 0.9rem;
+
+    transition: background-color 0.3s ease;
+  
+    &:hover {
+      background-color: #dee2e6;
+    }
+  }
+  

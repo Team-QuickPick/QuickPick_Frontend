@@ -67,4 +67,4 @@ const SearchBar = ({
 
 export default SearchBar;
 
-Modal.setAppElement("#root"); // 앱 루트 요소 설정 (React
+// Modal.setAppElement("#root"); // 앱 루트 요소 설정 (React

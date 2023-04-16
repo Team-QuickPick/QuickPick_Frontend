@@ -6,7 +6,7 @@ export default class RecentHeader extends Component {
     return (
       <header className={styles.container}>
         <div className={styles.contents}>
-          <div className={styles.text}>recnt page</div>
+          <div className={styles.text}>recent page</div>
         </div>
       </header>
     );

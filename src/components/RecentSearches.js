@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import styles from "./RecentSearches.module.scss"; // Import the SCSS module
+import styles from "./RecentSearches.module.scss";
 
 const RecentSearches = ({
   setSearchTerm,
@@ -23,7 +23,7 @@ const RecentSearches = ({
 
   return (
     <div>
-      <h2>최근 검색어</h2>
+      <h4>최근 검색어</h4>
       {recentSearches.length > 0 ? (
         <div className={styles.recentSearchesContainer}>
           {recentSearches.slice(0, 5).map((searchTerm) => (

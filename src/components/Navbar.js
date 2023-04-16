@@ -14,6 +14,12 @@ export default class Navbar extends Component {
     if (this.props.onSearchIconClick) {
       this.props.onSearchIconClick();
     }
+    if (this.props.onSearchTermChange) {
+      this.props.onSearchTermChange("");
+    }
+    if (this.props.onStoreSelect) {
+      this.props.onStoreSelect("");
+    }
   };
 
   render() {

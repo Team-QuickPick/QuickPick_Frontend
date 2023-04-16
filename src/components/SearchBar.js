@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
+
 import { fetchStores } from "../utils/fetchData";
 import styles from "./SearchBar.module.scss";
 
@@ -27,16 +28,19 @@ const SearchBar = ({
     }
   }, [resetInput]);
 
+  // 검색어 변경
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
     onSearchTermChange(event.target.value);
   };
 
+  // 매장 변경
   const handleStoreChange = (event) => {
     setSelectedStore(event.target.value);
     onStoreSelect(event.target.value);
   };
 
+  // 검색 폼 제출
   const handleFormSubmit = (event) => {
     event.preventDefault();
     onSearchButtonClick();
@@ -66,5 +70,3 @@ const SearchBar = ({
 };
 
 export default SearchBar;
-
-// Modal.setAppElement("#root"); // 앱 루트 요소 설정 (React

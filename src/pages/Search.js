@@ -9,65 +9,74 @@ import { fetchProducts, fetchStores } from "../utils/fetchData";
 import RecentSearches from "../components/RecentSearches";
 
 export default function Search() {
+  const [products, setProducts] = useState([]); // products 변수 선언
+
   const [searchResults, setSearchResults] = useState([]);
   const [selectedStore, setSelectedStore] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [searchPerformed, setSearchPerformed] = useState(false);
 
-  const handleStoreSelect = useCallback(
-    (storeName) => {
-      setSelectedStore(storeName);
-    },
-    [setSelectedStore]
-  );
+  const handleStoreSelect = useCallback((storeName) => {
+    setSelectedStore(storeName);
+  }, []);
 
-  const handleSearchTermChange = useCallback(
-    (term) => {
-      setSearchTerm(term);
-    },
-    [setSearchTerm]
-  );
+  const handleSearchTermChange = useCallback((term) => {
+    setSearchTerm(term);
+  }, []);
 
   const handleSearch = useCallback(async () => {
     if (searchTerm.trim() === "") {
-      // 검색어가 비어있을 경우
       alert("검색어를 입력해주세요.");
       return;
     }
-    // 검색어가 입력된 경우
-    const products = await fetchProducts();
-    const stores = await fetchStores();
-    const selectedStorePk = stores.find(
-      (store) => store.name === selectedStore
-    )?.pk;
 
-    const filteredProducts = products.filter((product) => {
-      const productName = product.name.toLowerCase();
-      const searchTermLowerCase = searchTerm.toLowerCase();
-      return (
-        productName.includes(searchTermLowerCase) &&
-        (selectedStorePk === "" ||
-          product.product_location.includes(selectedStorePk))
+    try {
+      const fetchedProducts = await fetchProducts();
+      const stores = await fetchStores();
+      const selectedStorePk = stores.find(
+        (store) => store.name === selectedStore
+      )?.pk;
+
+      const filteredProducts = fetchedProducts.filter((product) => {
+        const productName = product.name.toLowerCase();
+        const searchTermLowerCase = searchTerm.toLowerCase();
+        return (
+          productName.includes(searchTermLowerCase) &&
+          (selectedStorePk === "" ||
+            product.product_location.includes(selectedStorePk))
+        );
+      });
+
+      const recentSearches = JSON.parse(
+        localStorage.getItem("recentSearches") || "[]"
       );
-    });
+      localStorage.setItem(
+        "recentSearches",
+        JSON.stringify(
+          [...new Set([searchTerm, ...recentSearches])].slice(0, 5)
+        )
+      );
 
-    // Update localStorage with the recent search term
-    const storedSearches = localStorage.getItem("recentSearches");
-    let recentSearches = storedSearches ? JSON.parse(storedSearches) : [];
-    recentSearches = [...new Set([searchTerm, ...recentSearches])].slice(0, 5);
-    localStorage.setItem("recentSearches", JSON.stringify(recentSearches));
-
-    setSearchResults(filteredProducts);
-    setSearchPerformed(true);
+      setProducts(fetchedProducts); // products 변수에 값을 할당
+      setSearchResults(filteredProducts);
+      setSearchPerformed(true);
+    } catch (error) {
+      console.error(error);
+      alert("상품 정보를 가져오는 중 오류가 발생했습니다.");
+    }
   }, [searchTerm, selectedStore]);
 
   const resetSearch = useCallback(() => {
-    setSearchResults([]);
-    setSearchPerformed(false);
-    setSearchTerm("");
     setSelectedStore("");
+    setSearchTerm("");
+    setSearchPerformed(false);
   }, []);
 
+  useEffect(() => {
+    if (localStorage.getItem("recentSearches") === null) {
+      localStorage.setItem("recentSearches", JSON.stringify([]));
+    }
+  }, []);
   return (
     <>
       <SearchHeader />
@@ -75,7 +84,10 @@ export default function Search() {
         <SearchBar
           onStoreSelect={handleStoreSelect}
           onSearchTermChange={handleSearchTermChange}
-          onSearchButtonClick={handleSearch} // Pass handleSearch function as a prop
+          onSearchButtonClick={handleSearch}
+          onResetSearch={resetSearch} // Pass resetSearch function as a prop
+          selectedStore={selectedStore} // Pass selectedStore as a prop
+          searchTerm={searchTerm} // Pass searchTerm as a prop
         />
         <div className={styles.searchResultsCount}>
           {searchResults.length > 0

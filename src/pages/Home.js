@@ -42,7 +42,10 @@ export default function Home() {
       const result = await axios.get("http://127.0.0.1:8000/api/v1/products/");
       // console.log(result);
       if (result) {
-        setPopularProductList(result.data);
+        // setPopularProductList(result.data);
+        // 데이터 랜덤으로 섞기
+        const shuffledData = result.data.sort(() => Math.random() - 0.5);
+        setPopularProductList(shuffledData);
         setLoading(false);
       }
     } catch (error) {

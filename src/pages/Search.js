@@ -12,9 +12,10 @@ export default function Search() {
   const [products, setProducts] = useState([]); // products 변수 선언
 
   const [searchResults, setSearchResults] = useState([]);
+  const [searchPerformed, setSearchPerformed] = useState(false);
+
   const [selectedStore, setSelectedStore] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchPerformed, setSearchPerformed] = useState(false);
 
   const handleStoreSelect = useCallback((storeName) => {
     setSelectedStore(storeName);

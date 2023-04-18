@@ -13,7 +13,7 @@ const KakaoLogin = () => {
         `https://kauth.kakao.com/oauth/token?
         grant_type=${grant_type}
         &client_id=${client_id}
-        &redirect_uri=http://localhost:3000/oauth/callback/kakao
+        &redirect_uri=http://127.0.0.1:3000/kakaoLogin
         &code=${code}`,
         {
           headers: {

@@ -15,12 +15,6 @@ const RecentSearches = ({
     }
   }, []);
 
-  const handleRecentSearchClick = (searchTerm) => {
-    setSearchTerm(searchTerm);
-    onSearchTermChange(searchTerm);
-    onSearchButtonClick();
-  };
-
   return (
     <div>
       <h4>최근 검색어</h4>

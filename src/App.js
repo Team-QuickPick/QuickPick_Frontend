@@ -9,7 +9,9 @@ import Recent from "./pages/Recent";
 
 import SideButton from "./components/SideButton";
 import Footer from "./components/Footer";
-// import KakaoLogin from "./services/KakaoLogin";
+
+// import Auth from "./services/Auth";
+import KakaoLogin from "./services/KakaoLogin";
 import Auth from "./services/Auth";
 
 function App() {

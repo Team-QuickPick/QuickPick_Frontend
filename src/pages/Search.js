@@ -7,6 +7,7 @@ import SearchBar from "../components/SearchBar";
 import Product from "../components/Product";
 import { fetchProducts, fetchStores } from "../utils/fetchData";
 import RecentSearches from "../components/RecentSearches";
+import PopularSearches from "../components/PopularSearches";
 
 export default function Search() {
   const [products, setProducts] = useState([]); // products 변수 선언
@@ -103,11 +104,16 @@ export default function Search() {
           ) : searchPerformed ? (
             <div className={styles.noResults}>찾으시는 상품이 없습니다.</div>
           ) : (
-            <RecentSearches
-              setSearchTerm={setSearchTerm}
-              onSearchTermChange={handleSearchTermChange}
-              onSearchButtonClick={handleSearch}
-            />
+            <>
+              <RecentSearches
+                setSearchTerm={setSearchTerm}
+                onSearchTermChange={handleSearchTermChange}
+                onSearchButtonClick={handleSearch}
+              />
+              <div>
+                <PopularSearches />
+              </div>
+            </>
           )}
         </div>
       </div>

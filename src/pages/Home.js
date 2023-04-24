@@ -57,8 +57,6 @@ export default function Home() {
     setFocusedItem(item);
     setShowModal(true);
   };
-  
-  
 
   return (
     <>
@@ -104,8 +102,14 @@ export default function Home() {
           <div className={styles.bestContainer}>
             {popularProductList.slice(0, 10).map((item, index) => {
               return (
-                <div key={`popularProduct${item.name}${index}`} className={styles.bestItems} onClick={()=>{openModal(item)}}>
-                  <div className={styles.bestImg}>{item.image}이미지</div>
+                <div
+                  key={`popularProduct${item.name}${index}`}
+                  className={styles.bestItems}
+                  onClick={() => {
+                    openModal(item);
+                  }}
+                >
+                  <img className={styles.bestImg} src={item.image} />
                   <div className={styles.bestName}>{item.name}</div>
                   <div className={styles.bestPrice}>{item.price}</div>
                 </div>
@@ -113,7 +117,11 @@ export default function Home() {
             })}
           </div>
         </div>
-        <Modal showModal={showModal} setShowModal={setShowModal} renderItem={focusedItem} />
+        <Modal
+          showModal={showModal}
+          setShowModal={setShowModal}
+          renderItem={focusedItem}
+        />
       </div>
       <Navbar />
     </>

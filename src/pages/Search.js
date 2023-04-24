@@ -1,233 +1,122 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import { useQuery } from "react-query";
-
+import React, { useCallback, useState } from "react";
+import { useEffect } from "react";
 import styles from "./Search.module.scss";
 import Navbar from "../components/Navbar";
 import SearchHeader from "../components/SearchHeader";
 import SearchBar from "../components/SearchBar";
-import SelectStore from "../components/SelectStore";
-import { fetchProducts, fetchStores } from "../utils/fetchData";
 import Product from "../components/Product";
+import { fetchProducts, fetchStores } from "../utils/fetchData";
+import RecentSearches from "../components/RecentSearches";
+import PopularSearches from "../components/PopularSearches";
 
 export default function Search() {
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  useEffect(() => {
-    if (location.state) {
-      setSearchResults(location.state.searchResults);
-      setSearchPerformed(location.state.searchPerformed);
-      setSelectedStore(location.state.selectedStore);
-      setInputValue(location.state.inputValue);
-    }
-  }, [location]);
-  // 매장 데이터
-  const { data: storeData, isLoading: storeIsLoading } = useQuery(
-    "stores",
-    fetchStores
-  );
-  const [stores, setStores] = useState({});
-
-  useEffect(() => {
-    if (storeData) {
-      const newStores = {};
-      storeData.forEach((store) => {
-        newStores[store.pk] = store.name;
-      });
-      setStores(newStores);
-    }
-  }, [storeData]);
-
-  // 상품 데이터
-  const { data: productData, isLoading: productIsLoading } = useQuery(
-    "products",
-    fetchProducts
-  );
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    if (productData && stores) {
-      const productsData = productData.map((item) => ({
-        id: item.pk,
-        name: item.name,
-        price: item.price,
-        image: item.image,
-        product_location: item.product_location.map(
-          (storePk) => stores[storePk]
-        ),
-      }));
-      setData(productsData);
-    }
-  }, [productData, stores]);
+  const [products, setProducts] = useState([]); // products 변수 선언
 
   const [searchResults, setSearchResults] = useState([]);
   const [searchPerformed, setSearchPerformed] = useState(false);
+
   const [selectedStore, setSelectedStore] = useState("");
-  const [inputValue, setInputValue] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const handleStoreSelect = (selectedStoreKey) => {
-    setSelectedStore(selectedStoreKey);
-    if (searchPerformed) {
-      handleSearch(inputValue);
-    }
-  };
-
-  useEffect(() => {
-    if (location.state) {
-      setSearchResults(location.state.searchResults);
-      setSearchPerformed(location.state.searchPerformed);
-    }
+  const handleStoreSelect = useCallback((storeName) => {
+    setSelectedStore(storeName);
   }, []);
 
-  const handleSearch = (searchTerm) => {
-    if (selectedStore === "") {
-      alert("먼저 매장을 선택하세요.");
+  const handleSearchTermChange = useCallback((term) => {
+    setSearchTerm(term);
+  }, []);
+
+  const handleSearch = useCallback(async () => {
+    if (searchTerm.trim() === "") {
+      alert("검색어를 입력해주세요.");
       return;
     }
 
-    // 검색 결과를 location 객체에 저장
-    navigate(location.pathname, {
-      state: {
-        searchResults,
-        searchPerformed: true,
-        selectedStore,
-        inputValue: searchTerm,
-      },
-    });
+    try {
+      const fetchedProducts = await fetchProducts();
+      const stores = await fetchStores();
+      const selectedStorePk = stores.find(
+        (store) => store.name === selectedStore
+      )?.pk;
 
-    setInputValue(searchTerm);
-    if (selectedStore === "") {
-      alert("먼저 매장을 선택하세요.");
-      return;
+      const filteredProducts = fetchedProducts.filter((product) => {
+        const productName = product.name.toLowerCase();
+        const searchTermLowerCase = searchTerm.toLowerCase();
+        return (
+          productName.includes(searchTermLowerCase) &&
+          (selectedStorePk === "" ||
+            product.product_location.includes(selectedStorePk))
+        );
+      });
+
+      const recentSearches = JSON.parse(
+        localStorage.getItem("recentSearches") || "[]"
+      );
+      localStorage.setItem(
+        "recentSearches",
+        JSON.stringify(
+          [...new Set([searchTerm, ...recentSearches])].slice(0, 5)
+        )
+      );
+
+      setProducts(fetchedProducts); // products 변수에 값을 할당
+      setSearchResults(filteredProducts);
+      setSearchPerformed(true);
+    } catch (error) {
+      console.error(error);
+      alert("상품 정보를 가져오는 중 오류가 발생했습니다.");
     }
-    // 검색 결과 초기화
-    setSearchResults([]);
+  }, [searchTerm, selectedStore]);
 
-    // 선택된 매장 이름 가져오기
-    const selectedStoreName = stores[selectedStore];
-
-    // 검색 기능
-    const results = data.filter(
-      (item) =>
-        item.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-        item.product_location.includes(selectedStoreName)
-    );
-
-    setSearchResults(results);
-    setSearchPerformed(true);
-
-    // 최근 검색어에 추가
-    const recentSearches =
-      JSON.parse(localStorage.getItem("recentSearches")) || [];
-    const updatedSearches = [
-      searchTerm,
-      ...recentSearches.filter((keyword) => keyword !== searchTerm),
-    ];
-    setRecentSearches(updatedSearches);
-    localStorage.setItem(
-      "recentSearches",
-      JSON.stringify(updatedSearches.slice(0, 5))
-    );
-  };
-
-  const [recentSearches, setRecentSearches] = useState([]);
-
-  useEffect(() => {
-    const recentSearches =
-      JSON.parse(localStorage.getItem("recentSearches")) || [];
-    setRecentSearches(recentSearches);
-  }, []);
-
-  useEffect(() => {
-    if (searchPerformed) {
-      handleSearch(inputValue); // 매장을 변경할 때마다 현재 입력된 검색어로 검색을 수행합니다.
-    }
-  }, [selectedStore, searchPerformed]);
-
-  // navbar의 search 아이콘 눌렀을 때 화면 초기화 시키기
-  const [resetInput, setResetInput] = useState(false);
-
-  const resetSearch = () => {
-    setSearchResults([]);
+  const resetSearch = useCallback(() => {
+    setSelectedStore("");
+    setSearchTerm("");
     setSearchPerformed(false);
-    setResetInput(true);
-  };
+  }, []);
 
   useEffect(() => {
-    if (resetInput) {
-      setResetInput(false);
+    if (localStorage.getItem("recentSearches") === null) {
+      localStorage.setItem("recentSearches", JSON.stringify([]));
     }
-  }, [resetInput]);
-
-  // 중복 없이 랜덤한 배열 요소를 n개 반환하는 함수
-  const getRandomArrayElements = (arr, n) => {
-    const shuffledArray = [...arr].sort(() => 0.5 - Math.random());
-    return shuffledArray.slice(0, n).map((item) => item.name);
-  };
-
-  const handleKeywordClick = (keyword) => {
-    setInputValue(keyword); // 클릭된 키워드를 inputValue 상태에 저장
-    handleSearch(keyword); // 클릭된 키워드로 검색 수행
-  };
-
+  }, []);
   return (
     <>
       <SearchHeader />
       <div className={styles.container}>
-        <div className={styles.content}>
-          <div>
-            <SearchBar onSearch={handleSearch} resetInput={resetInput} />
-            {!searchPerformed ? (
+        <SearchBar
+          onStoreSelect={handleStoreSelect}
+          onSearchTermChange={handleSearchTermChange}
+          onSearchButtonClick={handleSearch}
+          onResetSearch={resetSearch} // Pass resetSearch function as a prop
+          selectedStore={selectedStore} // Pass selectedStore as a prop
+          searchTerm={searchTerm} // Pass searchTerm as a prop
+        />
+        <div className={styles.searchResultsCount}>
+          {searchResults.length > 0
+            ? `${searchResults.length}건의 상품이 검색되었습니다.`
+            : null}
+        </div>
+        <div className={styles.productList}>
+          {searchResults.length > 0 ? (
+            searchResults.map((product) => (
+              <Product key={product.id} product={product} />
+            ))
+          ) : searchPerformed ? (
+            <div className={styles.noResults}>찾으시는 상품이 없습니다.</div>
+          ) : (
+            <>
+              <RecentSearches
+                setSearchTerm={setSearchTerm}
+                onSearchTermChange={handleSearchTermChange}
+                onSearchButtonClick={handleSearch}
+              />
               <div>
-                <div className={styles.searchKeyword}>
-                  <div className={styles.searchKeywordTitle}>최근 검색어</div>
-                  <div className={styles.searchKeywordList}>
-                    {recentSearches.map((keyword, index) => (
-                      <div
-                        key={index}
-                        className={styles.searchKeywordItem}
-                        onClick={() => handleKeywordClick(keyword)}
-                      >
-                        {keyword}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                <div className={styles.searchKeyword}>
-                  <div className={styles.searchKeywordTitle}>인기 검색어</div>
-                  <div className={styles.searchKeywordList}>
-                    {getRandomArrayElements(data, 1).map((name, index) => (
-                      <div
-                        key={index}
-                        className={styles.searchKeywordItem}
-                        onClick={() => handleKeywordClick(name)}
-                      >
-                        {name}
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                <PopularSearches />
               </div>
-            ) : searchResults.length === 0 ? (
-              <div>찾으시는 상품이 없습니다.</div>
-            ) : (
-              <>
-                <div className={styles.searchResultText}>
-                  총 {searchResults.length}건의 상품이 검색되었습니다.
-                </div>
-                <div className={styles.productsContainer}>
-                  {searchResults.map((result, index) => (
-                    <Product key={index} product={result} />
-                  ))}
-                </div>
-              </>
-            )}
-          </div>
+            </>
+          )}
         </div>
       </div>
-      <SelectStore onStoreSelect={handleStoreSelect} stores={stores} />
       <Navbar onSearchIconClick={resetSearch} />
     </>
   );

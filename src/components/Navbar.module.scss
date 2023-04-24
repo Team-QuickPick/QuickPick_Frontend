@@ -7,6 +7,7 @@
   box-shadow: 0 0 3px #ADD7F6 ;
   position: fixed;
   bottom: 0;
+  z-index: 10;
 
   // 데스크탑
   @media (min-width: 700px) {

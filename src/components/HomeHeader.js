@@ -1,25 +1,31 @@
-import React, { Component } from "react";
+import React from "react";
 import styles from "./Header.module.scss";
-import { Link } from "react-router-dom";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import useAuth from "../services/useAuth";
 
-export default class HomeHeader extends Component {
-  render() {
-    return (
-      <header className={styles.container}>
-        <div className={styles.logo}>
-          <img className={styles.logoImg} src="img/Logo.png" />
+const HomeHeader = () => {
+  const { isLoggedIn, logout } = useAuth();
+
+  return (
+    <header className={styles.container}>
+      <div className={styles.logo}>
+        <img className={styles.logoImg} src="img/Logo.png" alt="Logo" />
+      </div>
+      {isLoggedIn ? (
+        <div className={styles.user} onClick={logout}>
+          <FontAwesomeIcon icon={faUser} />
+          <span>로그아웃</span>
         </div>
-        <div className={styles.user}>
-          <div className={styles.userIcon}>
-            <Link to="/">
-              <FontAwesomeIcon icon={faUser} size="lg" color="black" />
-            </Link>
-          </div>
-        </div>
-      </header>
-    );
-  }
-}
+      ) : (
+        <Link to="/login" className={styles.user}>
+          <FontAwesomeIcon icon={faUser} />
+          <span>로그인</span>
+        </Link>
+      )}
+    </header>
+  );
+};
+
+export default HomeHeader;

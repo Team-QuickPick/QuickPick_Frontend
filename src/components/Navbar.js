@@ -1,3 +1,4 @@
+// Navbar.js
 import React, { Component } from "react";
 import styles from "./Navbar.module.scss";
 import { Link } from "react-router-dom";
@@ -13,6 +14,12 @@ export default class Navbar extends Component {
   handleSearchIconClick = () => {
     if (this.props.onSearchIconClick) {
       this.props.onSearchIconClick();
+    }
+    if (this.props.onSearchTermChange) {
+      this.props.onSearchTermChange("");
+    }
+    if (this.props.onStoreSelect) {
+      this.props.onStoreSelect("");
     }
   };
 

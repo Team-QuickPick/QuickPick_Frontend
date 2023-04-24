@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import axios from "axios";
 
 import styles from "./Home.module.scss";
@@ -9,12 +9,15 @@ import Navbar from "../components/Navbar";
 
 export default function Detail() {
   const { id } = useParams();
-  const [product, setProduct] = useState({});
+  const location = useLocation();
+  const [product, setProduct] = useState(location.state?.product || {});
 
   useEffect(() => {
-    axios
-      .get(`http://127.0.0.1:8000/api/v1/products/${id}`)
-      .then((response) => {
+    async function getProductData() {
+      try {
+        const response = await axios.get(
+          `http://127.0.0.1:8000/api/v1/products/${id}`
+        );
         const productData = {
           id: response.data.id,
           name: response.data.name,
@@ -25,9 +28,29 @@ export default function Detail() {
           categoryimage: response.data.product_number[0],
         };
         setProduct(productData);
-        console.log(productData);
-      });
-  }, [id]);
+
+        // 클릭한 상품 정보를 localStorage에 저장
+        const recentProducts = JSON.parse(
+          localStorage.getItem("recentProducts") || "[]"
+        );
+        const clickedProduct = {
+          name: productData.name,
+          price: productData.price,
+          image: productData.image,
+        };
+        localStorage.setItem(
+          "recentProducts",
+          JSON.stringify([...new Set([clickedProduct, ...recentProducts])])
+        );
+      } catch (error) {
+        console.error(error);
+        alert("상품 정보를 가져오는 중 오류가 발생했습니다.");
+      }
+    }
+    if (!product.id) {
+      getProductData();
+    }
+  }, [id, product.id]);
 
   return (
     <>

@@ -42,7 +42,10 @@ export default function Home() {
       const result = await axios.get("http://127.0.0.1:8000/api/v1/products/");
       // console.log(result);
       if (result) {
-        setPopularProductList(result.data);
+        // setPopularProductList(result.data);
+        // 데이터 랜덤으로 섞기
+        const shuffledData = result.data.sort(() => Math.random() - 0.5);
+        setPopularProductList(shuffledData);
         setLoading(false);
       }
     } catch (error) {
@@ -54,8 +57,6 @@ export default function Home() {
     setFocusedItem(item);
     setShowModal(true);
   };
-  
-  
 
   return (
     <>
@@ -101,8 +102,14 @@ export default function Home() {
           <div className={styles.bestContainer}>
             {popularProductList.slice(0, 10).map((item, index) => {
               return (
-                <div key={`popularProduct${item.name}${index}`} className={styles.bestItems} onClick={()=>{openModal(item)}}>
-                  <div className={styles.bestImg}>{item.image}이미지</div>
+                <div
+                  key={`popularProduct${item.name}${index}`}
+                  className={styles.bestItems}
+                  onClick={() => {
+                    openModal(item);
+                  }}
+                >
+                  <img className={styles.bestImg} src={item.image} />
                   <div className={styles.bestName}>{item.name}</div>
                   <div className={styles.bestPrice}>{item.price}</div>
                 </div>
@@ -110,7 +117,11 @@ export default function Home() {
             })}
           </div>
         </div>
-        <Modal showModal={showModal} setShowModal={setShowModal} renderItem={focusedItem} />
+        <Modal
+          showModal={showModal}
+          setShowModal={setShowModal}
+          renderItem={focusedItem}
+        />
       </div>
       <Navbar />
     </>

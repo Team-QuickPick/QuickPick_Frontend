@@ -106,7 +106,7 @@ export default function Home() {
                     openModal(item);
                   }}
                 >
-                  <div className={styles.bestImg}>{item.image}이미지</div>
+                  <img className={styles.bestImg} src={item.image} />
                   <div className={styles.bestName}>{item.name}</div>
                   <div className={styles.bestPrice}>{item.price}</div>
                 </div>

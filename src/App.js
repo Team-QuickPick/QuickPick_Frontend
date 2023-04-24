@@ -9,9 +9,8 @@ import Recent from "./pages/Recent";
 
 import SideButton from "./components/SideButton";
 import Footer from "./components/Footer";
-
-import KakaoLogin from "./services/KakaoLogin";
-import Auth from "./services/Auth";
+import LoginForm from "./services/LoginForm";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   return (
@@ -23,7 +22,7 @@ function App() {
         <Route path="/search" element={<Search />} />
         <Route path="/recent" element={<Recent />} />
         <Route path="/wishlist" element={<WishList />} />
-        <Route path="/kakaoLogin" element={<Auth />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
       <SideButton />
       <Footer />

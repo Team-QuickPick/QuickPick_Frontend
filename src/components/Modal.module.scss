@@ -20,18 +20,13 @@
     box-shadow: 0 0 3px #3B28CC;
     padding: 20px;
     border-radius: 10px;
-}
-
-
-.btn{
-    background-color: white;
-    text-align: right;
+    text-align: center;
 }
 
 .img{
     width: 200px;
     height: 200px;
-    margin: 10px 0;
+    margin: 10px auto;
     box-shadow: 0 0 3px #3B28CC;
     border-radius: 10px;
 }
@@ -47,3 +42,14 @@
 .stores{
     font-size: small;
 }
+
+.btn{
+    background-color: white;
+    text-align: right;
+    margin: 0;
+}
+
+.btn:hover {
+    background-color: initial;
+    color: initial;
+  }

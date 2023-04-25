@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+
 import styles from "./RecentSearches.module.scss";
 
 const RecentSearches = ({

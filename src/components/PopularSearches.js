@@ -1,5 +1,6 @@
 // PopularSearches.js
 import React, { useState, useEffect } from "react";
+
 import axios from "axios";
 import styles from "./PopularSearches.module.scss";
 
@@ -21,22 +22,13 @@ const PopularSearches = ({ onSearchTermChange, onSearchButtonClick }) => {
     getPopularSearches();
   }, []);
 
-  const handlePopularSearchClick = (searchTerm) => {
-    onSearchTermChange(searchTerm);
-    onSearchButtonClick();
-  };
-
   return (
     <div className={styles.container}>
       <h4>인기 검색어</h4>
       {popularSearches.length > 0 ? (
         <div className={styles.popularSearchesContainer}>
           {popularSearches.map((product) => (
-            <div
-              key={product.id}
-              className={styles.popularSearchItem}
-              //   onClick={() => handlePopularSearchClick(product.name)}
-            >
+            <div key={product.id} className={styles.popularSearchItem}>
               {product.name}
             </div>
           ))}

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import styles from "./Header.module.scss";
+import { Link } from "react-router-dom";
+import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
-import useAuth from "../services/useAuth";
-import axios from "axios";
+import useAuth from "../hooks/useAuth";
+import styles from "./Header.module.scss";
 
 const HomeHeader = () => {
   const { isLoggedIn, logout, accessToken } = useAuth();
@@ -32,22 +32,36 @@ const HomeHeader = () => {
     }
   }, [isLoggedIn, accessToken]);
 
+  const renderUser = () => {
+    if (isLoggedIn) {
+      return (
+        <div className={styles.user}>
+          <span>{`${username} 님`}</span>
+          <button type="button" onClick={logout}>
+            로그아웃
+          </button>
+        </div>
+      );
+    } else {
+      return (
+        <div className={styles.user}>
+          <Link to="/login">
+            <button type="button">
+              <FontAwesomeIcon icon={faUser} className={styles.userIcon} />
+              <span>로그인</span>
+            </button>
+          </Link>
+        </div>
+      );
+    }
+  };
+
   return (
     <header className={styles.container}>
       <div className={styles.logo}>
         <img className={styles.logoImg} src="img/Logo.png" alt="Logo" />
       </div>
-      {isLoggedIn ? (
-        <div className={styles.user} onClick={logout}>
-          <FontAwesomeIcon icon={faUser} />
-          <span>{`${username} 님 로그아웃`}</span>
-        </div>
-      ) : (
-        <Link to="/login" className={styles.user}>
-          <FontAwesomeIcon icon={faUser} />
-          <span>로그인</span>
-        </Link>
-      )}
+      {renderUser()}
     </header>
   );
 };

@@ -1,11 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
-import axios from "axios";
 
+import axios from "axios";
 import DetailHeader from "../components/DetailHeader";
 import Navbar from "../components/Navbar";
-
 import styles from "./Detail.module.scss";
 
 export default function Detail() {

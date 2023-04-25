@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import styles from "./Recent.module.scss";
 import Navbar from "../components/Navbar";
-import RecentHeader from "../components/RecentHeader";
+import DetailHeader from "../components/DetailHeader";
 
 export default function Recent() {
   const [recentProducts, setRecentProducts] = useState([]);
@@ -15,13 +15,13 @@ export default function Recent() {
 
   return (
     <>
-      <RecentHeader />
+      <DetailHeader />
       <div className={styles.container}>
-        <h2>최근 본 상품</h2>
+        <h4>최근 본 상품</h4>
         {recentProducts.length > 0 ? (
           <div className={styles.productList}>
             {recentProducts.map((product) => (
-              <Link to={`/detail/${product.id}`} key={product.id}>
+              <Link to={`/detail/${product.id}`} key={product.id} style={{ textDecoration: "none" }}>
                 <div className={styles.product}>
                   <img src={product.image} alt={product.name} />
                   <div className={styles.productInfo}>

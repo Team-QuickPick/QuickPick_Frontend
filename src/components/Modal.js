@@ -43,7 +43,7 @@ const Modal = ({ showModal, setShowModal, renderItem }) => {
       <div className={styles.modalContent}>
         <img className={styles.img} src={image} />
         <div className={styles.name}>{name}</div>
-        <div className={styles.price}>{price}</div>
+        <div className={styles.price}>{price}원</div>
         <div>
           {persistStoreList.map((store, index) => {
             return (

@@ -57,21 +57,19 @@ export default function Detail() {
       <DetailHeader />
       <div className={styles.container}>
         <div className={styles.product}>
-          <img
-            className={styles.productImg}
-            src={product.image}
-            alt="product image"
-          />
-
+          <h3 className={styles.productCategory}>{product.category}</h3>
           <img
             className={styles.categoryImg}
             src={`/img/detail/${product.categoryimage}.png`}
             alt="category image"
           />
-
+          <img
+            className={styles.productImg}
+            src={product.image}
+            alt="product image"
+          />
           <h3 className={styles.productName}>{product.name}</h3>
           <h3 className={styles.productPrice}>{product.price}원</h3>
-          <h3 className={styles.productCategory}>{product.category}</h3>
         </div>
       </div>
       <Navbar />

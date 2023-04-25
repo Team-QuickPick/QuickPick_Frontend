@@ -23,6 +23,8 @@ const DetailHeader = () => {
           />
         </div>
       </div>
+
+      
     </header>
   );
 };

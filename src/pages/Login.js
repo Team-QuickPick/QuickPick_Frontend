@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import styles from "./Login.module.scss";
 import DetailHeader from "../components/DetailHeader";
+import Navbar from "../components/Navbar";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -74,6 +75,7 @@ const Login = () => {
           </div>
         </div>
       )}
+      {/* <Navbar /> */}
     </div>
   );
 };

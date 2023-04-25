@@ -58,8 +58,10 @@ const Login = () => {
           <button type="submit">Login</button>
         </form>
         <div className={styles.loginSignup}>
-          <span>회원이 아니신가요?🤔 </span>
-          <Link to="/signup">Sign up</Link>
+          <h4>
+            회원이 아니신가요?🤔
+            <Link to="/signup">Sign up</Link>
+          </h4>
         </div>
       </div>
     </div>

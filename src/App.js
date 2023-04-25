@@ -10,6 +10,7 @@ import Recent from "./pages/Recent";
 import SideButton from "./components/SideButton";
 import Footer from "./components/Footer";
 import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
         <Route path="/recent" element={<Recent />} />
         <Route path="/wishlist" element={<WishList />} />
         <Route path="/login" element={<Login />} />
-        {/* <Route path="/signup" element={<SignUp />} /> */}
+        <Route path="/signup" element={<SignUp />} />
       </Routes>
       <SideButton />
       <Footer />

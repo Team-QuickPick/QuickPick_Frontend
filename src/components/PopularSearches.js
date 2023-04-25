@@ -13,7 +13,7 @@ const PopularSearches = ({ onSearchTermChange, onSearchButtonClick }) => {
           "http://127.0.0.1:8000/api/v1/products/popular/"
         );
         setPopularSearches(response.data);
-        console.log(response);
+        // console.log(response);
       } catch (error) {
         console.error(error);
       }

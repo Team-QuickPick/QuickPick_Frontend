@@ -58,22 +58,10 @@ const HomeHeader = () => {
 
   return (
     <header className={styles.container}>
-      <Link to="/">
-        <div className={styles.logo}>
-          <img className={styles.logoImg} src="img/Logo.png" alt="Logo" />
-        </div>
-      </Link>
-      {isLoggedIn ? (
-        <div className={styles.user} onClick={logout}>
-          <FontAwesomeIcon icon={faUser} />
-          <span>로그아웃</span>
-        </div>
-      ) : (
-        <Link to="/login" className={styles.user}>
-          <FontAwesomeIcon icon={faUser} />
-          <span>로그인</span>
-        </Link>
-      )}
+      <div className={styles.logo}>
+        <img className={styles.logoImg} src="img/Logo.png" alt="Logo" />
+      </div>
+      {renderUser()}
     </header>
   );
 };

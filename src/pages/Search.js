@@ -8,6 +8,7 @@ import Product from "../components/Product";
 import { fetchProducts, fetchStores } from "../utils/fetchData";
 import RecentSearches from "../components/RecentSearches";
 import PopularSearches from "../components/PopularSearches";
+import HomeHeader from "../components/HomeHeader";
 
 export default function Search() {
   const [products, setProducts] = useState([]); // products 변수 선언
@@ -81,6 +82,7 @@ export default function Search() {
   }, []);
   return (
     <>
+      {/* <HomeHeader /> */}
       <SearchHeader />
       <div className={styles.container}>
         <SearchBar

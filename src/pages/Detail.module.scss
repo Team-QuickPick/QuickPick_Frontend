@@ -1,96 +1,37 @@
 .container {
   width: 100%;
   height: 100%;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding: 50px 0;
   text-align: center;
-// 광고
-.ad{
-  overflow: hidden;
-  position: relative;
-  // 캐러셀
-  .adContainer{
+
+  .product {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    background-color: #3B28CC;
-    width: 300%;
-    transition: transform 0.5s;
-    .adInner{
-      width: 100%;
-      height: 100%;
-      float: left;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      img{
-        height: 70vh;
-        max-width: 100%;
-      }
+
+    .productImg {
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
     }
-  }
-  // 버튼
-  .btn{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    position: absolute;
-    top: 95%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    .button1,
-    .button2,
-    .button3{
-      width: 15px;
-      height: 15px;
-      border: 1px solid #3B28CC;
-      box-shadow: 0 0 2px #3B28CC;
-      border-radius: 50%;
-      background-color: white;
-      opacity: 0.7;
-      margin: 0 3px;
-      cursor: pointer;
+
+    .categoryImg {
+      margin: 30px 0;
+      width: 200px;
+      height: auto;
     }
-  }
-}
-// 인기 상품
-.best{
-  // 인기 상품
-  .text{
-    font-size: 20px;
-    font-weight: bold;
-    text-align: left;
-    margin: 15px;
-  }
-  // GET 요청
-  .bestContainer{
-    display: grid;
-    grid-gap: 20px; /* add gap between the items */
-    grid-template-columns: 1fr; /* change to 1 column when screen width is less than 768px */
-    grid-template-rows: auto; /* reset rows to auto */
-    //넓은 화면
-    @media (min-width: 700px) {
-      grid-template-columns: repeat(2, 1fr); /* create 2 columns with equal width */
-      grid-template-rows: repeat(8, 1fr); /* create 8 rows with equal height */
-    }
-    .bestItems{
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+
+    .productName {
+      margin: 10px 0;
+      font-size: 1em;
+      font-weight: bold;
+      color: black;
       text-align: center;
-      .bestImg{
-        width: 200px;
-        height: 200px;
-        border: 1px solid #3B28CC;
-        background-color: #ADD7F6;
-      }
-      .bestName{
-        font-size: 12px;
-      }
-      .bestPrice{
-        font-size: 12px;
-      }
     }
-  }
-}
-}
+
+    .productPrice {
+      font-size: 0.8em;
+      font-weight: bold;
+      color: orangered;
+      text-align: center;
+    }}}

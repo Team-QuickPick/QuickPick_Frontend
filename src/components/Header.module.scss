@@ -20,7 +20,6 @@
   .logo{
     height: 100%;
     padding-left: 5px;
-    // position: relative;
 
     .logoImg{
       position: absolute;
@@ -32,11 +31,12 @@
   .user{
     height: 100%;
     padding-right: 20px;
-    
-    .userIcon{
-      display: flex;
-      justify-content: center;
-      transform: translateY(50%);
+    display: flex;
+    align-items: center;
+    color: black;
+    text-decoration: none;
+    span{
+      padding-left: 5px;
     }
   }
 }

@@ -3,6 +3,10 @@
   height: 100%;
   padding: 50px 0;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 
 // 광고
 .ad{
@@ -28,8 +32,6 @@
       img{
         height: auto;
         max-width: 100%;
-        box-shadow: 0 0 3px #3B28CC;
-
       }
     }
   }
@@ -47,8 +49,8 @@
     .button3{
       width: 15px;
       height: 15px;
-      border: 1px solid #3B28CC;
-      box-shadow: 0 0 2px #3B28CC;
+      border: 1px solid #ADD7F6;
+      box-shadow: 0 0 2px #ADD7F6;
       border-radius: 50%;
       background-color: white;
       opacity: 0.7;
@@ -62,18 +64,19 @@
   // 인기 상품
   .text{
     font-size: 20px;
-    font-weight: bold;
+    font-weight:bold;
     text-align: left;
-    // margin: 15px;
-    padding: 40px 0 20px 15px
+    padding: 40px 0 15px 15px
   }
   // GET 요청
   .bestContainer{
+    width: 95%;
     display: grid;
-    grid-gap: 20px; 
+    grid-gap: 30px; 
     grid-template-columns: 1fr; /* 좁은 화면에서 1행이 되게 */
     grid-template-rows: auto; 
     flex-wrap: wrap;
+    
 
     //넓은 화면
     @media (min-width: 700px) {
@@ -81,6 +84,7 @@
       grid-template-rows: repeat(5, 1fr); 
     }
     .bestItems{
+      padding: 10px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -88,16 +92,22 @@
       text-align: center;
       cursor: pointer;
 
+      background-color: #ffffff;
+      padding-top: 20px;
+      border-radius: 10px; 
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
+
       .bestImg{
         width: 200px;
         height: 200px;
-        box-shadow: 0 0 3px #3B28CC;
-        border-radius: 10px;
+        box-shadow: 0 0 3px white;
+        border-radius: 7px;
       }
       .bestName{
         font-size: 14px;
+        font-weight: bold;
         width: 200px;
-        height: 40px;
+        height: 60px;
         white-space: normal;
         display: flex;
         justify-content: center;

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styles from "./Footer.module.scss";
-
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faYoutube } from "@fortawesome/free-brands-svg-icons";
 
@@ -9,9 +9,11 @@ export default class Footer extends Component {
   render() {
     return (
       <footer className={styles.container}>
-        <div className={styles.text1}>
-          <div><img src="img/Logo.png"></img></div>
-        </div>
+        <Link to="/">
+          <div className={styles.text1}>
+            <div><img src="img/Logo.png"></img></div>
+          </div>
+        </Link>
         <div className={styles.text2}>
           <div>Quick Pick (주) | 사업자등록번호: 000-23-83272</div>
         </div>       

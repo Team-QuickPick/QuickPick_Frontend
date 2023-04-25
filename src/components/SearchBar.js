@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Modal from "react-modal";
 
 import { fetchStores } from "../utils/fetchData";
 import styles from "./SearchBar.module.scss";

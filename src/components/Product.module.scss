@@ -1,28 +1,37 @@
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
 .product {
   height: 40vh;
-  background-color: #ffffff; // 상품 배경색
-  padding-top: 20px; // 상품 내부 패딩
-  border-radius: 10px; // 상품 모서리 둥글게
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); // 상품에 그림자 효과 추가
-  width: calc(50% - 30px); // 상품 칸 너비
-  margin: 15px; // 상품 간격
-  float: left; // 상품 왼쪽 정렬
-  box-sizing: border-box; // padding과 border가 너비에 포함되도록 설정
+  background-color: #ffffff; 
+  padding-top: 20px; 
+  border-radius: 10px; 
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
+  width: calc(50% - 30px); 
+  margin: 15px;
+  float: left;
+  box-sizing: border-box;
 }
 
 .image {
-  width: 120px; // 이미지 크기
+  width: 120px;
   height: 120px;
   object-fit: cover;
-  border-radius: 10px; // 이미지 모서리
+  border-radius: 10px;
 }
 
-.productInfo {
-  margin-top: 10px; // 상품 정보와 이미지 사이 간격
-}
+  .productInfo {
+    .name{
+      margin: 10px 0;
+      font-size: 1em;
+      font-weight: bold;
+      color: black;
+    }
+  
+    .price{
+      font-size: 0.9em;
+      font-weight: bold;
+      color: orangered;
+    }
+  }
+
+
+
+

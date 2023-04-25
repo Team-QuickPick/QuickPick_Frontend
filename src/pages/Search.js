@@ -2,12 +2,12 @@ import React, { useCallback, useState } from "react";
 import { useEffect } from "react";
 import styles from "./Search.module.scss";
 import Navbar from "../components/Navbar";
-import SearchHeader from "../components/SearchHeader";
 import SearchBar from "../components/SearchBar";
 import Product from "../components/Product";
 import { fetchProducts, fetchStores } from "../utils/fetchData";
 import RecentSearches from "../components/RecentSearches";
 import PopularSearches from "../components/PopularSearches";
+import DetailHeader from "../components/DetailHeader";
 
 export default function Search() {
   const [products, setProducts] = useState([]); // products 변수 선언
@@ -81,7 +81,7 @@ export default function Search() {
   }, []);
   return (
     <>
-      <SearchHeader />
+      <DetailHeader />
       <div className={styles.container}>
         <SearchBar
           onStoreSelect={handleStoreSelect}

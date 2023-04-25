@@ -3,10 +3,12 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import styles from "./Login.module.scss";
 import DetailHeader from "../components/DetailHeader";
+import Navbar from "../components/Navbar";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorModalVisible, setErrorModalVisible] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -29,6 +31,7 @@ const Login = () => {
       navigate("/");
     } catch (error) {
       console.error(error);
+      setErrorModalVisible(true);
     }
   };
 
@@ -58,10 +61,21 @@ const Login = () => {
           <button type="submit">Login</button>
         </form>
         <div className={styles.loginSignup}>
-          <span>회원이 아니신가요?🤔 </span>
-          <Link to="/signup">Sign up</Link>
+          <h4>
+            회원이 아니신가요?🤔
+            <Link to="/signup">Sign up</Link>
+          </h4>
         </div>
       </div>
+      {errorModalVisible && (
+        <div className={styles.modal}>
+          <div className={styles.modalContent}>
+            <p>등록되지 않은 회원이거나 비밀번호가 일치하지 않습니다.</p>
+            <button onClick={() => setErrorModalVisible(false)}>확인</button>
+          </div>
+        </div>
+      )}
+      {/* <Navbar /> */}
     </div>
   );
 };

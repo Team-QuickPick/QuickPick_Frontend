@@ -28,14 +28,26 @@
     width: 200px;
     height: 200px;
     margin: 10px auto;
-    box-shadow: 0 0 3px #3B28CC;
     border-radius: 10px;
 }
 
 .name{
     word-wrap: break-word;
     overflow: auto;
+    font-size: 1.1em;
+    font-weight: bold;
 }
+
+.price{
+    font-size: 1em;
+    color: orangered;
+}
+
+.stores{
+    font-size: 0.9em;
+    color: #3B28CC;
+}
+
 
 .btn{
     background-color: white;

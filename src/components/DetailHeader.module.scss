@@ -2,9 +2,9 @@
     background-color: white;
     box-shadow: 0 0 3px #ADD7F6 ;
   
-    width: 100%;
+    // width: 100%;
     height: 50px;
-    position: fixed;
+    // position: fixed;
     top: 0;
     z-index: 999;
   
@@ -28,6 +28,10 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
+
+      :hover{
+        cursor: pointer;
+      }
     }
   }
   

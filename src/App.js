@@ -9,8 +9,7 @@ import Recent from "./pages/Recent";
 
 import SideButton from "./components/SideButton";
 import Footer from "./components/Footer";
-import LoginForm from "./services/LoginForm";
-import LoginPage from "./pages/LoginPage";
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -22,7 +21,8 @@ function App() {
         <Route path="/search" element={<Search />} />
         <Route path="/recent" element={<Recent />} />
         <Route path="/wishlist" element={<WishList />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/login" element={<Login />} />
+        {/* <Route path="/signup" element={<SignUp />} /> */}
       </Routes>
       <SideButton />
       <Footer />

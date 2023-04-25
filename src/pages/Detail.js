@@ -3,9 +3,10 @@ import { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import axios from "axios";
 
-import styles from "./Home.module.scss";
 import DetailHeader from "../components/DetailHeader";
 import Navbar from "../components/Navbar";
+
+import styles from "./Detail.module.scss";
 
 export default function Detail() {
   const { id } = useParams();
@@ -56,18 +57,20 @@ export default function Detail() {
     <>
       <DetailHeader />
       <div className={styles.container}>
-        <div>
-          <h1>상품 상세 정보</h1>
-          <img src={product.image} alt={product.name} />
-
+        <div className={styles.product}>
+          <h3 className={styles.productCategory}>{product.category}</h3>
           <img
+            className={styles.categoryImg}
             src={`/img/detail/${product.categoryimage}.png`}
-            alt={product.categoryimage}
+            alt="category image"
           />
-          <h2>{product.name}</h2>
-          <h3>{product.price}</h3>
-          <h3>{product.category}</h3>
-          <h3>{product.number}</h3>
+          <img
+            className={styles.productImg}
+            src={product.image}
+            alt="product image"
+          />
+          <h3 className={styles.productName}>{product.name}</h3>
+          <h3 className={styles.productPrice}>{product.price}원</h3>
         </div>
       </div>
       <Navbar />

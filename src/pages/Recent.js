@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import styles from "./Recent.module.scss";
 import Navbar from "../components/Navbar";
-import RecentHeader from "../components/RecentHeader";
+import DetailHeader from "../components/DetailHeader";
 
 export default function Recent() {
   const [recentProducts, setRecentProducts] = useState([]);
@@ -15,20 +15,26 @@ export default function Recent() {
 
   return (
     <>
-      <RecentHeader />
+      <DetailHeader />
       <div className={styles.container}>
-        <h2>최근 본 상품</h2>
-        {recentProducts.map((product) => (
-          // <Link to={`/detail/${product.id}`} key={product.id}>
-          <div className={styles.product}>
-            <img src={product.image} alt={product.name} />
-            <div className={styles.productInfo}>
-              <div className={styles.productName}>{product.name}</div>
-              <div className={styles.productPrice}>{product.price}</div>
-            </div>
+        <h4>최근 본 상품</h4>
+        {recentProducts.length > 0 ? (
+          <div className={styles.productList}>
+            {recentProducts.map((product) => (
+              <Link to={`/detail/${product.id}`} key={product.id} style={{ textDecoration: "none" }}>
+                <div className={styles.product}>
+                  <img src={product.image} alt={product.name} />
+                  <div className={styles.productInfo}>
+                    <div className={styles.productName}>{product.name}</div>
+                    <div className={styles.productPrice}>{product.price}원</div>
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
-          // </Link>
-        ))}
+        ) : (
+          <div className={styles.noProducts}>최근 본 상품이 없습니다.</div>
+        )}
       </div>
       <Navbar />
     </>

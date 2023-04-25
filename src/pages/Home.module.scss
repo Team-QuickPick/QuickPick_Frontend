@@ -3,6 +3,10 @@
   height: 100%;
   padding: 50px 0;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 
 // 광고
 .ad{
@@ -28,7 +32,6 @@
       img{
         height: auto;
         max-width: 100%;
-
       }
     }
   }
@@ -67,11 +70,13 @@
   }
   // GET 요청
   .bestContainer{
+    width: 95%;
     display: grid;
-    grid-gap: 20px; 
+    grid-gap: 30px; 
     grid-template-columns: 1fr; /* 좁은 화면에서 1행이 되게 */
     grid-template-rows: auto; 
     flex-wrap: wrap;
+    
 
     //넓은 화면
     @media (min-width: 700px) {
@@ -79,12 +84,18 @@
       grid-template-rows: repeat(5, 1fr); 
     }
     .bestItems{
+      padding: 10px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
       cursor: pointer;
+
+      background-color: #ffffff;
+      padding-top: 20px;
+      border-radius: 10px; 
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
 
       .bestImg{
         width: 200px;

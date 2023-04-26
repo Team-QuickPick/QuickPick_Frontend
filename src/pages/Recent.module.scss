@@ -6,7 +6,7 @@ $secondary-color: #6c757d;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 70vh;
+  height: calc(100% - 50px);
   padding-top: 50px;
 
   h4 {

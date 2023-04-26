@@ -11,6 +11,7 @@ const SignUp = () => {
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [passwordMatch, setPasswordMatch] = useState(false);
   const [showPasswordMatchMsg, setShowPasswordMatchMsg] = useState(false);
+  const [showPasswordLengthMsg, setShowPasswordLengthMsg] = useState(false);
 
   const handlePasswordMatch = (confirmation) => {
     return password === confirmation;
@@ -22,6 +23,11 @@ const SignUp = () => {
     setShowPasswordMatchMsg(true);
   };
 
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    setShowPasswordLengthMsg(e.target.value.length < 8);
+  };
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -29,6 +35,11 @@ const SignUp = () => {
 
     if (!passwordMatch) {
       alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+      return;
+    }
+
+    if (password.length < 8) {
+      alert("비밀번호는 8글자 이상이어야 합니다.");
       return;
     }
 
@@ -75,8 +86,11 @@ const SignUp = () => {
               type="password"
               id="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={handlePasswordChange}
             />
+            {showPasswordLengthMsg && (
+              <p>비밀번호는 8글자 이상이어야 합니다.</p>
+            )}
           </div>
           <div>
             <label htmlFor="passwordConfirmation">Confirm Password:</label>

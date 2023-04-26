@@ -8,10 +8,29 @@ const SignUp = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [passwordMatch, setPasswordMatch] = useState(false);
+  const [showPasswordMatchMsg, setShowPasswordMatchMsg] = useState(false);
+
+  const handlePasswordMatch = (confirmation) => {
+    return password === confirmation;
+  };
+
+  const handlePasswordConfirmationChange = (e) => {
+    setPasswordConfirmation(e.target.value);
+    setPasswordMatch(handlePasswordMatch(e.target.value));
+    setShowPasswordMatchMsg(true);
+  };
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!passwordMatch) {
+      alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+      return;
+    }
 
     try {
       await axios.post("http://127.0.0.1:8000/api/v1/users/signup/", {
@@ -59,6 +78,23 @@ const SignUp = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
+          <div>
+            <label htmlFor="passwordConfirmation">Confirm Password:</label>
+            <input
+              type="password"
+              id="passwordConfirmation"
+              value={passwordConfirmation}
+              onChange={handlePasswordConfirmationChange}
+            />
+            {showPasswordMatchMsg && (
+              <p>
+                {passwordMatch
+                  ? "비밀번호가 일치합니다."
+                  : "비밀번호가 일치하지 않습니다."}
+              </p>
+            )}
+          </div>
+
           <button type="submit">Sign up</button>
         </form>
         <div className={styles.signupLogin}>

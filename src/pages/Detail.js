@@ -34,13 +34,22 @@ export default function Detail() {
           localStorage.getItem("recentProducts") || "[]"
         );
         const clickedProduct = {
+          id: productData.id,
           name: productData.name,
           price: productData.price,
           image: productData.image,
         };
+        const existingProductIndex = recentProducts.findIndex(
+          (product) => product.id === clickedProduct.id
+        );
+
+        if (existingProductIndex !== -1) {
+          recentProducts.splice(existingProductIndex, 1);
+        }
+
         localStorage.setItem(
           "recentProducts",
-          JSON.stringify([...new Set([clickedProduct, ...recentProducts])])
+          JSON.stringify([clickedProduct, ...recentProducts])
         );
       } catch (error) {
         console.error(error);

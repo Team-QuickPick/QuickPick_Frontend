@@ -7,6 +7,7 @@ import DetailHeader from "../components/DetailHeader";
 
 export default function Recent() {
   const [recentProducts, setRecentProducts] = useState([]);
+  console.log(recentProducts);
 
   useEffect(() => {
     const recent = JSON.parse(localStorage.getItem("recentProducts") || "[]");
@@ -21,7 +22,15 @@ export default function Recent() {
         {recentProducts.length > 0 ? (
           <div className={styles.productList}>
             {recentProducts.map((product) => (
-              <Link to={`/detail/${product.id}`} key={product.id} style={{ textDecoration: "none" }}>
+              <Link
+                to={{
+                  pathname: `/detail/${product.id}`,
+                  state: { product },
+                }}
+                key={product.id}
+                style={{ textDecoration: "none" }}
+              >
+                {console.log(product.id)}
                 <div className={styles.product}>
                   <img src={product.image} alt={product.name} />
                   <div className={styles.productInfo}>

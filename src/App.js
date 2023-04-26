@@ -6,11 +6,11 @@ import Detail from "./pages/Detail";
 import Search from "./pages/Search";
 import WishList from "./pages/WishList";
 import Recent from "./pages/Recent";
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
 
 import SideButton from "./components/SideButton";
 import Footer from "./components/Footer";
-import Login from "./pages/Login";
-import SignUp from "./pages/SignUp";
 
 function App() {
   return (

@@ -111,7 +111,7 @@ export default function Home() {
                 >
                   <img className={styles.bestImg} src={item.image} />
                   <div className={styles.bestName}>{item.name}</div>
-                  <div className={styles.bestPrice}>{item.price}</div>
+                  <div className={styles.bestPrice}>{item.price}원</div>
                 </div>
               );
             })}

@@ -68,12 +68,18 @@ const Login = () => {
         </div>
       </div>
       {errorModalVisible && (
-        <div className={styles.modal}>
-          <div className={styles.modalContent}>
-            <p>등록되지 않은 회원이거나 비밀번호가 일치하지 않습니다.</p>
-            <button onClick={() => setErrorModalVisible(false)}>확인</button>
+        <>
+          <div
+            className={styles.modalOverlay}
+            onClick={() => setErrorModalVisible(false)}
+          />
+          <div className={styles.modal}>
+            <div className={styles.modalContent}>
+              <p>등록되지 않은 회원이거나 비밀번호가 일치하지 않습니다.</p>
+              <button onClick={() => setErrorModalVisible(false)}>확인</button>
+            </div>
           </div>
-        </div>
+        </>
       )}
       {/* <Navbar /> */}
     </div>

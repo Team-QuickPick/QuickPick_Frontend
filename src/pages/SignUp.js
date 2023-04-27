@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import styles from "./SignUp.module.scss";
 import DetailHeader from "../components/DetailHeader";
+import Navbar from "../components/Navbar";
 
 const SignUp = () => {
   const [username, setUsername] = useState("");
@@ -118,6 +119,7 @@ const SignUp = () => {
           </h4>
         </div>
       </div>
+      <Navbar />
     </div>
   );
 };

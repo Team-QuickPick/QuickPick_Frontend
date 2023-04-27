@@ -129,7 +129,7 @@ const SignUp = () => {
         <div className={styles.signupLogin}>
           <h4>
             이미 회원이신가요?🙆‍♀️
-            <Link to="/login">Login</Link>
+            <Link to="/login">로그인 하러 가기</Link>
           </h4>
         </div>
       </div>

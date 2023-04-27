@@ -81,7 +81,7 @@ const Login = () => {
           </div>
         </>
       )}
-      {/* <Navbar /> */}
+      <Navbar />
     </div>
   );
 };

@@ -34,7 +34,7 @@ const SignUp = () => {
     e.preventDefault();
 
     if (!passwordMatch) {
-      alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+      alert("비밀번호 확인이 일치하지 않습니다.");
       return;
     }
 
@@ -44,16 +44,22 @@ const SignUp = () => {
     }
 
     try {
-      await axios.post("http://127.0.0.1:8000/api/v1/users/signup/", {
-        username,
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/v1/users/signup/",
+        {
+          username,
+          email,
+          password,
+        }
+      );
 
-      // 회원가입 성공 후 로그인 페이지로 이동
       navigate("/login");
     } catch (error) {
       console.error(error);
+
+      if (error.response && error.response.data.email) {
+        alert("이미 가입된 이메일 입니다.");
+      }
     }
   };
 
@@ -63,42 +69,50 @@ const SignUp = () => {
       <div className={styles.signupContainer}>
         <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="username">Username:</label>
+            <label htmlFor="username">username</label>
             <input
               type="text"
               id="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              placeholder="닉네임 입력"
+              required
             />
           </div>
           <div>
-            <label htmlFor="email">Email:</label>
+            <label htmlFor="email">email</label>
             <input
               type="email"
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              placeholder="이메일 입력"
+              required
             />
           </div>
           <div>
-            <label htmlFor="password">Password:</label>
+            <label htmlFor="password">password</label>
             <input
               type="password"
               id="password"
               value={password}
               onChange={handlePasswordChange}
+              placeholder="비밀번호 8자리 이상 입력"
+              required
             />
             {showPasswordLengthMsg && (
               <p>비밀번호는 8글자 이상이어야 합니다.</p>
             )}
           </div>
           <div>
-            <label htmlFor="passwordConfirmation">Confirm Password:</label>
+            <label htmlFor="passwordConfirmation"></label>
             <input
               type="password"
               id="passwordConfirmation"
               value={passwordConfirmation}
               onChange={handlePasswordConfirmationChange}
+              placeholder="다시 한번 입력해 주세요."
+              required
             />
             {showPasswordMatchMsg && (
               <p>

@@ -41,21 +41,23 @@ const Login = () => {
       <div className={styles.loginContainer}>
         <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="email">Email:</label>
+            <label htmlFor="email">email</label>
             <input
               type="email"
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              placeholder="이메일 입력"
             />
           </div>
           <div>
-            <label htmlFor="password">Password:</label>
+            <label htmlFor="password">password</label>
             <input
               type="password"
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="비밀번호 입력"
             />
           </div>
           <button type="submit">Login</button>

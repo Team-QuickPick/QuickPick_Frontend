@@ -25,7 +25,7 @@ const Login = () => {
       const { refresh, access } = response.data;
       localStorage.setItem("refresh", refresh);
       localStorage.setItem("access", access);
-      console.log(response.data);
+      // console.log(response.data);
 
       // 로그인 성공 후 홈 페이지로 이동
       navigate("/");
@@ -38,8 +38,10 @@ const Login = () => {
   return (
     <div>
       <DetailHeader />
+
       <div className={styles.loginContainer}>
         <form onSubmit={handleSubmit}>
+          <h3 className={styles.title}>LOGIN</h3>
           <div>
             <label htmlFor="email">email</label>
             <input
@@ -65,7 +67,7 @@ const Login = () => {
         <div className={styles.loginSignup}>
           <h4>
             회원이 아니신가요?🤔
-            <Link to="/signup">Sign up</Link>
+            <Link to="/signup">QuickPick 시작하기</Link>
           </h4>
         </div>
       </div>

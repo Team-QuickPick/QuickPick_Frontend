@@ -1,18 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
 import styles from "./Recent.module.scss";
 import Navbar from "../components/Navbar";
 import DetailHeader from "../components/DetailHeader";
 
 export default function Recent() {
   const [recentProducts, setRecentProducts] = useState([]);
-  console.log(recentProducts);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const recent = JSON.parse(localStorage.getItem("recentProducts") || "[]");
-    setRecentProducts(recent);
+    async function getRecentProducts() {
+      const recent = JSON.parse(localStorage.getItem("recentProducts") || "[]");
+      setRecentProducts(recent);
+      setLoading(false);
+    }
+    getRecentProducts();
   }, []);
+
+  if (loading) {
+    return (
+      <>
+        <DetailHeader />
+        <div className={styles.container}>Loading...</div>
+        <Navbar />
+      </>
+    );
+  }
 
   return (
     <>
@@ -30,9 +43,12 @@ export default function Recent() {
                 key={product.id}
                 style={{ textDecoration: "none" }}
               >
-                {console.log(product.id)}
                 <div className={styles.product}>
-                  <img src={product.image} alt={product.name} />
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className={styles.productImage}
+                  />
                   <div className={styles.productInfo}>
                     <div className={styles.productName}>{product.name}</div>
                     <div className={styles.productPrice}>{product.price}원</div>

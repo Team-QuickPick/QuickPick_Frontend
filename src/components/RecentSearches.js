@@ -2,11 +2,7 @@ import { useState, useEffect } from "react";
 
 import styles from "./RecentSearches.module.scss";
 
-const RecentSearches = ({
-  setSearchTerm,
-  onSearchTermChange,
-  onSearchButtonClick,
-}) => {
+const RecentSearches = () => {
   const [recentSearches, setRecentSearches] = useState([]);
 
   useEffect(() => {

@@ -14,7 +14,6 @@ const PopularSearches = ({ onSearchTermChange, onSearchButtonClick }) => {
           "http://127.0.0.1:8000/api/v1/products/popular/"
         );
         setPopularSearches(response.data);
-        // console.log(response);
       } catch (error) {
         console.error(error);
       }
@@ -24,7 +23,7 @@ const PopularSearches = ({ onSearchTermChange, onSearchButtonClick }) => {
 
   return (
     <div className={styles.container}>
-      <h4>인기 검색어</h4>
+      <h4>🔥QuickPick's 실시간 랭킹🔥</h4>
       {popularSearches.length > 0 ? (
         <div className={styles.popularSearchesContainer}>
           {popularSearches.map((product) => (

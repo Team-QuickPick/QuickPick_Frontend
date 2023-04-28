@@ -1,4 +1,3 @@
-// Navbar.js
 import React, { Component } from "react";
 import styles from "./Navbar.module.scss";
 import { Link } from "react-router-dom";
@@ -23,17 +22,21 @@ export default class Navbar extends Component {
     }
   };
 
+  handleLinkClick = () => {
+    window.scrollTo(0, 0);
+  };
+
   render() {
     return (
       <nav className={styles.container}>
         <div className={styles.contents}>
-          <Link to="/search" onClick={this.handleSearchIconClick}>
+          <Link to="/search" onClick={this.handleLinkClick}>
             <FontAwesomeIcon icon={faMagnifyingGlass} size="lg" color="black" />
           </Link>
-          <Link to="/">
+          <Link to="/" onClick={this.handleLinkClick}>
             <FontAwesomeIcon icon={faHouse} size="lg" color="black" />
           </Link>
-          <Link to="/recent">
+          <Link to="/recent" onClick={this.handleLinkClick}>
             <FontAwesomeIcon icon={faClockRotateLeft} size="lg" color="black" />
           </Link>
         </div>

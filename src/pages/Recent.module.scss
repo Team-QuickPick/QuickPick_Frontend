@@ -12,7 +12,7 @@ $secondary-color: #6c757d;
   flex-direction: column;
 
   h4 {
-    font-size: 1.5em;
+    font-size: 2em;
     font-weight: bold;
     margin-bottom: 40px;
   }
@@ -31,9 +31,9 @@ $secondary-color: #6c757d;
       align-items: center;
       margin-bottom: 40px;
       background-color: #ffffff;
-      padding-top: 20px; 
-      border-radius: 10px; 
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
+      padding-top: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
       img {
         width: 90%;
@@ -51,7 +51,6 @@ $secondary-color: #6c757d;
           font-weight: bold;
           color: black;
           margin: 10px 0;
-
         }
 
         .productPrice {
@@ -70,5 +69,21 @@ $secondary-color: #6c757d;
     font-size: 24px;
     color: $secondary-color;
     margin-top: 40px;
+  }
+
+  .searchButton {
+    display: block;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    padding: 8px 16px;
+    background-color: $primary-color;
+    color: #ffffff;
+    border-radius: 4px;
+    text-decoration: none;
+  }
+
+  .searchButton:hover {
+    background-color: #0062cc;
+    color: #ffffff;
   }
 }

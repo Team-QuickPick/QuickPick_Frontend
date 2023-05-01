@@ -4,7 +4,7 @@
   padding: 50px 0;
   text-align: center;
   
-
+  // 검색 결과
   .product {
     display: flex;
     flex-direction: column;
@@ -37,4 +37,22 @@
       text-align: center;
     }
   }
+
+  // 추천 상품
+  .recommendContainer{
+    width: 100%;
+    height: auto;
+
+    .recommendBox{
+      width: 80%;
+
+      .recommendItems{
+
+        .recommendImg{
+          width: 100px;
+        }
+      }
+    }
+  }
+  
 }

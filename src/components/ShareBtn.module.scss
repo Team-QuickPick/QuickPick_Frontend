@@ -1,0 +1,76 @@
+// 공유하기
+.shareContainer{
+    width: 100%;
+    height: 100px;
+    .shareBtn{
+      background-color: #ADD7F6;
+      color: black;
+      font-weight: bold;
+    }
+  
+    //모달 실행시 BGImage
+    .modalBackdrop{
+      background-color: rgba(0, 0, 0, 0.5);
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      
+      //모달 실행시 뜨는 팝업창
+      .modalView{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        position: absolute;
+        width: 120px;
+        height: 50px;
+        border-radius: 1rem;
+        background-color: white;
+        padding: 15px;
+        
+        // 버튼을 배치시키는 컨테이너
+        .gridContainer{
+            display: grid;
+            grid-template-columns: repeat(2, 48px);
+            // grid-column-gap: 8px;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+          
+            .kakaoBtn{
+                cursor: pointer;
+                border: 0px;
+                background-color: transparent;
+            
+                .kakaoIcon{
+                    width: 48px;
+                    height: 48px;
+                    border-radius: 24px;
+                    position: relative;
+                    left: -5px;
+                }
+            }
+
+            .urlShareBtn{
+                width: 48px;
+                height: 48px;
+                color: white;
+                border-radius: 24px;
+                border: 0px;
+                font-weight: 800;
+                font-size: 18px;
+                cursor: pointer;
+                background-color: black;
+                &:hover {
+                background-color: #a99fee;
+                }
+            }
+        }
+      }
+  }
+  }

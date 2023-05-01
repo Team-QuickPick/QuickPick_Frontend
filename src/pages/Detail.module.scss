@@ -39,6 +39,20 @@
   }
 
   // 추천 상품
+  .recommendContainer{
+    width: 100%;
+    height: auto;
 
+    .recommendBox{
+      width: 80%;
+
+      .recommendItems{
+
+        .recommendImg{
+          width: 100px;
+        }
+      }
+    }
+  }
   
 }

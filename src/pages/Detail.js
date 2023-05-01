@@ -6,6 +6,10 @@ import axios from "axios";
 import DetailHeader from "../components/DetailHeader";
 import Navbar from "../components/Navbar";
 import ShareBtn from "../components/ShareBtn";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 
 export default function Detail() {
   const { id } = useParams();
@@ -13,9 +17,7 @@ export default function Detail() {
   const [product, setProduct] = useState(location.state?.product || {});
   const [recommendedProducts, setRecommendedProducts] = useState([]);
 
-  
   useEffect(() => {
-
     async function getProductData() {
       try {
         const response = await axios.get(
@@ -36,12 +38,13 @@ export default function Detail() {
         const recommendedResponse = await axios.get(
           `http://127.0.0.1:8000/api/v1/products/${response.data.product_category}`
           );
-          if(recommendedResponse.data){
-            const shuffledProducts = recommendedResponse.data.sort(() => 0.5 - Math.random());
-            const recommendedProducts = shuffledProducts.slice(0, 6);
-            setRecommendedProducts(recommendedProducts);
-            // setRecommendedProducts(recommendedResponse.data);
-          }
+        // 랜덤으로 중복되지 않게 6개 가져오기
+        if(recommendedResponse.data){
+          const recommendedProducts = recommendedResponse.data.filter(product => product.id !== productData.id);
+          const shuffledProducts = recommendedProducts.sort(() => 0.5 - Math.random());
+          const recommendedProductsSubset = shuffledProducts.slice(0, 6);
+          setRecommendedProducts(recommendedProductsSubset);
+        }
 
         // 클릭한 상품 정보를 localStorage에 저장
         const recentProducts = JSON.parse(
@@ -97,21 +100,19 @@ export default function Detail() {
         </div>
 
         {/* 추천 상품 */}
-        {recommendedProducts.length > 0 && (
-          <div className={styles.recommended}>
-            <h3>추천 상품</h3>
-            <div className={styles.recommended}>
-              {recommendedProducts.map((recommendedProducts) => (
-                <div key={recommendedProducts.id} className={styles.recommendedItems}>
-                  <img src={recommendedProducts.image} alt={recommendedProducts.name} />
-                  <h3>{recommendedProducts.name}</h3>
-                  <h3>{recommendedProducts.price}원</h3>
+        <Slider dots={false} slidesToShow={2} slidesToScroll={2} autoplay={true} autoplaySpeed={3000}>
+          {recommendedProducts.map(product => (
+            <div key={product.id}>
+              <div className={styles.recommendBox}>
+                <div key={product.id} className={styles.recommendedItems}>
+                  <img className={styles.recommendImg} src={product.image} alt={product.name} />
+                  <h3>{product.name}</h3>
+                  <h3>{product.price}원</h3>
                 </div>
-              ))}
+              </div>
             </div>
-          </div>
-        )}
-
+          ))}
+        </Slider>
         <ShareBtn />
       </div>
       <Navbar />

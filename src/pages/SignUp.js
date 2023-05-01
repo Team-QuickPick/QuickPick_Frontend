@@ -14,19 +14,16 @@ const SignUp = () => {
   const [showPasswordMatchMsg, setShowPasswordMatchMsg] = useState(false);
   const [showPasswordLengthMsg, setShowPasswordLengthMsg] = useState(false);
 
-  const handlePasswordMatch = (confirmation) => {
-    return password === confirmation;
-  };
-
   const handlePasswordConfirmationChange = (e) => {
     setPasswordConfirmation(e.target.value);
-    setPasswordMatch(handlePasswordMatch(e.target.value));
+    setPasswordMatch(password === e.target.value);
     setShowPasswordMatchMsg(true);
   };
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
     setShowPasswordLengthMsg(e.target.value.length < 8);
+    setShowPasswordMatchMsg(false);
   };
 
   const navigate = useNavigate();

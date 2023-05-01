@@ -1,46 +1,47 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
+import styles from "./Detail.module.scss";
 
 import axios from "axios";
 import DetailHeader from "../components/DetailHeader";
 import Navbar from "../components/Navbar";
-import styles from "./Detail.module.scss";
+import ShareBtn from "../components/ShareBtn";
 
 export default function Detail() {
   const { id } = useParams();
   const location = useLocation();
   const [product, setProduct] = useState(location.state?.product || {});
   const [recommendedProducts, setRecommendedProducts] = useState([]);
-  
 
+  
   useEffect(() => {
-    console.log('id--------------------',id)
-    console.log('location--------------------',location)
-    console.log('------------------',product);
+
     async function getProductData() {
       try {
         const response = await axios.get(
           `http://127.0.0.1:8000/api/v1/products/${id}`
-        );
-        const productData = {
-          id: response.data.id,
-          name: response.data.name,
-          price: response.data.price,
-          image: response.data.image,
-          category: response.data.product_category,
-          number: response.data.product_number,
-          categoryimage: response.data.product_number[0],
-        };
+          );
+          const productData = {
+            id: response.data.id,
+            name: response.data.name,
+            price: response.data.price,
+            image: response.data.image,
+            product_category: response.data.product_category,
+            number: response.data.product_number,
+            categoryimage: response.data.product_number[0],
+          };
         setProduct(productData);
 
-        // Get recommended products with the same category
+        // 검색 결과와 같은 카테고리 상품 가져오기
         const recommendedResponse = await axios.get(
-          // `http://127.0.0.1:8000/api/v1/products?category=${productData.category}&limit=6`
-          `http://127.0.0.1:8000/api/v1/products/`
-        );
-        const recommendedProducts = recommendedResponse.data.slice(0,6);
-        setRecommendedProducts(recommendedProducts);
-
+          `http://127.0.0.1:8000/api/v1/products/${response.data.product_category}`
+          );
+          if(recommendedResponse.data){
+            const shuffledProducts = recommendedResponse.data.sort(() => 0.5 - Math.random());
+            const recommendedProducts = shuffledProducts.slice(0, 6);
+            setRecommendedProducts(recommendedProducts);
+            // setRecommendedProducts(recommendedResponse.data);
+          }
 
         // 클릭한 상품 정보를 localStorage에 저장
         const recentProducts = JSON.parse(
@@ -74,8 +75,6 @@ export default function Detail() {
     }
   }, [id, product.id]);
 
-  
-
   return (
     <>
       <DetailHeader />
@@ -97,20 +96,23 @@ export default function Detail() {
           <h3 className={styles.productPrice}>{product.price}원</h3>
         </div>
 
+        {/* 추천 상품 */}
         {recommendedProducts.length > 0 && (
           <div className={styles.recommended}>
             <h3>추천 상품</h3>
-            <div className={styles.products}>
-              {recommendedProducts.map((product) => (
-                <div key={product.id} className={styles.product}>
-                  <img src={product.image} alt={product.name} />
-                  <h3>{product.name}</h3>
-                  <h3>{product.price}원</h3>
+            <div className={styles.recommended}>
+              {recommendedProducts.map((recommendedProducts) => (
+                <div key={recommendedProducts.id} className={styles.recommendedItems}>
+                  <img src={recommendedProducts.image} alt={recommendedProducts.name} />
+                  <h3>{recommendedProducts.name}</h3>
+                  <h3>{recommendedProducts.price}원</h3>
                 </div>
               ))}
             </div>
           </div>
         )}
+
+        <ShareBtn />
       </div>
       <Navbar />
     </>

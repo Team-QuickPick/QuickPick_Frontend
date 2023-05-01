@@ -84,7 +84,7 @@ export default function Detail() {
       <div className={styles.container}>
         {/* 검색 결과 */}
         <div className={styles.product}>
-          <h3 className={styles.productCategory}>{product.category}</h3>
+          <h3 className={styles.productCategory}>{product.product_category}</h3>
           <img
             className={styles.categoryImg}
             src={`/img/detail/${product.categoryimage}.png`}
@@ -99,8 +99,8 @@ export default function Detail() {
           <h3 className={styles.productPrice}>{product.price}원</h3>
         </div>
 
-        {/* 추천 상품 */}
-        <Slider dots={false} slidesToShow={2} slidesToScroll={2} autoplay={true} autoplaySpeed={3000}>
+        {/* 추천 상품 자동 슬라이드 */}
+        <Slider dots={false} slidesToShow={2} slidesToScroll={2} autoplay={true} autoplaySpeed={2500}>
           {recommendedProducts.map(product => (
             <div key={product.id}>
               <div className={styles.recommendBox}>
@@ -113,6 +113,8 @@ export default function Detail() {
             </div>
           ))}
         </Slider>
+        
+        {/* 공유하기 */}
         <ShareBtn />
       </div>
       <Navbar />

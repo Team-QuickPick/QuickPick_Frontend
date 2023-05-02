@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+
 import styles from "./Recent.module.scss";
 import Navbar from "../components/Navbar";
 import DetailHeader from "../components/DetailHeader";

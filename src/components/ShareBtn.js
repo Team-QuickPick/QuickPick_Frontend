@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react";
-import kakaoLogo from "../kakao.png";
-import styles from "./ShareBtn.module.scss";
 
+import styles from "./ShareBtn.module.scss";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useScript } from "../hooks/hooks";
 import KakaoShareBtn from "./KakaoShareBtn";
-
-
-
-
 
 // 공유버튼 클릭 => 카카오톡 공유 버튼
 const ShareBtn = () => {
@@ -16,10 +11,10 @@ const ShareBtn = () => {
   const openModalHandler = () => {
     setIsOpen(!isOpen);
   };
-  
+
   //window 객체에서 현재 url 가져오기
   const currentUrl = window.location.href;
-  
+
   // kakao SDK import하기
   const status = useScript("https://developers.kakao.com/sdk/js/kakao.js");
 
@@ -45,8 +40,7 @@ const ShareBtn = () => {
         content: {
           title: "Quick-Pick",
           description: "#화장품 #빨리 #찾기",
-          imageUrl:
-            "https://ifh.cc/g/76JPyh.png",
+          imageUrl: "https://ifh.cc/g/76JPyh.png",
           link: {
             mobileWebUrl: currentUrl,
             webUrl: currentUrl,
@@ -57,30 +51,31 @@ const ShareBtn = () => {
   };
 
   return (
-      <div className={styles.shareContainer}>
-        <button className={styles.shareBtn} onClick={openModalHandler}>
-          {isOpen ? "🔗 공유하기!" : "🔗 공유하기"}
-        </button>
-        {isOpen ? (
-          <div
-          className={styles.modalBackdrop}
-          onClick={openModalHandler}>
-            <div className={styles.modalView} role="dialog">
-              <div className={styles.gridContainer}>
-                <div className={styles.kakaoBtn} id="kakaotalk-sharing-btn">
-                  <div className={styles.kakaoIcon}>
-                    <img src={kakaoLogo} alt="kakao icon"></img>
-                  </div>
+    <div className={styles.shareContainer}>
+      <button className={styles.shareBtn} onClick={openModalHandler}>
+        {isOpen ? "🔗 공유하기!" : "🔗 공유하기"}
+      </button>
+      {isOpen ? (
+        <div className={styles.modalBackdrop} onClick={openModalHandler}>
+          <div className={styles.modalView} role="dialog">
+            <div className={styles.gridContainer}>
+              <div className={styles.kakaoBtn} id="kakaotalk-sharing-btn">
+                <div className={styles.kakaoIcon}>
+                  <img
+                    src={`${process.env.PUBLIC_URL}/img/kakao.png`}
+                    alt="kakao icon"
+                  ></img>
                 </div>
-                <KakaoShareBtn />
-                <CopyToClipboard text={currentUrl}>
-                  <div className={styles.urlShareBtn}>URL</div>
-                </CopyToClipboard>
               </div>
+              <KakaoShareBtn />
+              <CopyToClipboard text={currentUrl}>
+                <div className={styles.urlShareBtn}>URL</div>
+              </CopyToClipboard>
             </div>
           </div>
-        ) : null}
-      </div>
+        </div>
+      ) : null}
+    </div>
   );
 };
 

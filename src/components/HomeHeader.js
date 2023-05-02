@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import useAuth from "../hooks/useAuth";
 import styles from "./Header.module.scss";
+import axiosInstance from "../utils/axiosConfig";
 
 const HomeHeader = () => {
   const { isLoggedIn, logout, accessToken } = useAuth();
@@ -13,14 +14,11 @@ const HomeHeader = () => {
   useEffect(() => {
     const fetchUsername = async () => {
       try {
-        const response = await axios.get(
-          "http://127.0.0.1:8000/api/v1/users/profile/",
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
-        );
+        const response = await axiosInstance.get("/users/profile/", {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
         setUsername(response.data.username);
       } catch (error) {
         console.error(error);

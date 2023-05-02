@@ -9,6 +9,7 @@
   margin: 10px;
   float: left;
   box-sizing: border-box;
+  flex-basis: calc(50% - 10px); 
   // border: 1px solid red;
   
 }

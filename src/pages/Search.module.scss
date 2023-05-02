@@ -8,7 +8,6 @@
 }
 
 .productList {
-  // border: 1px solid red;
   margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
@@ -27,6 +26,7 @@
   align-items: center;
   flex-direction: column;
   
+  
 }
 
 .content {
@@ -36,6 +36,7 @@
   height: 100%;
   margin: 0 auto; // 중앙 정렬
   text-align: center;
+  
 }
 
 .searchResultText {
@@ -50,6 +51,7 @@ flex-direction: column;
 margin-bottom: 20px;
 font-size: 14px;
 font-weight: bold;
+
 }
 
 .searchKeywordTitle {
@@ -76,6 +78,11 @@ cursor: pointer;
 &:hover {
 background-color: #eee;
 }
+}
+
+.recentAndPopular {
+  display: flex;
+  flex-direction: column; /* 세로 방향으로 요소들을 나열 */
 }
 
 

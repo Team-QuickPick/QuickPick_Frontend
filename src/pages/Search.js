@@ -111,12 +111,12 @@ export default function Search() {
             <div className={styles.noResults}>찾으시는 상품이 없습니다.</div>
           ) : (
             <>
-              <RecentSearches
-                setSearchTerm={setSearchTerm}
-                onSearchTermChange={handleSearchTermChange}
-                onSearchButtonClick={handleSearch}
-              />
-              <div>
+              <div className={styles.recentAndPopular}>
+                <RecentSearches
+                  setSearchTerm={setSearchTerm}
+                  onSearchTermChange={handleSearchTermChange}
+                  onSearchButtonClick={handleSearch}
+                />
                 <PopularSearches />
               </div>
             </>

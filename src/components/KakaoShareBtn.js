@@ -20,7 +20,7 @@ const KakaoShareBtn = () => {
     };
   }, []);
 
-  return shareButton && <ShareBtn />;
+  // return shareButton && <ShareBtn />;
 };
 
 export default KakaoShareBtn;

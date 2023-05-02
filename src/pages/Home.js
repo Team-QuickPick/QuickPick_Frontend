@@ -19,7 +19,7 @@ export default function Home() {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveSlide((prevSlide) => (prevSlide + 1) % 3);
-    }, 3000);
+    }, 2000);
     return () => clearInterval(interval);
   }, []);
   useEffect(() => {

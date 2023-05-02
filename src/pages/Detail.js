@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, Link } from "react-router-dom";
 import styles from "./Detail.module.scss";
 
 import axiosInstance from "../utils/axiosConfig";
@@ -35,8 +35,7 @@ export default function Detail() {
         const recommendedResponse = await axiosInstance.get(
           `products/${response.data.product_category}`
         );
-        // 랜덤으로 중복되지 않게 6개 가져오기
-
+        // 위의 상품과 중복되지 않게 랜덤으로 15개 가져오기
         if(recommendedResponse.data){
           const recommendedProducts = recommendedResponse.data.filter(product => product.id !== productData.id);
           const shuffledProducts = recommendedProducts.sort(() => 0.5 - Math.random());
@@ -83,7 +82,7 @@ export default function Detail() {
       <div className={styles.container}>
         {/* 검색 결과 */}
         <div className={styles.product}>
-          <h3 className={styles.productCategory}>💎 {product.product_category} 💎</h3>
+          <h2 className={styles.productCategory}>💎 {product.product_category} 💎</h2>
           <img
             className={styles.categoryImg}
             src={`/img/detail/${product.categoryimage}.png`}
@@ -98,30 +97,37 @@ export default function Detail() {
           <h3 className={styles.productPrice}>{product.price}원</h3>
         </div>
 
-
         {/* 추천 상품 자동 슬라이드 */}
         <h3>🎁 같이 찾으시는 상품 🎁</h3>
         <Slider
           dots={false}
           slidesToShow={2.5}
           slidesToScroll={1}
+          initialSlide={7.5}
           autoplay={false}
-          draggable={true} // enable dragging
-          touchMove={true} // enable touch movement
-          swipeToSlide={true} // enable swiping to slide
+          draggable={true} // 드래그
+          touchMove={true} // 터치 이동
+          swipeToSlide={true} // 스와이프 슬라이드 이동
           infinite={true}
           className={styles.recommendSlider}
         >
-          {recommendedProducts.map(product => (
-            <div key={product.id} className={styles.recommendBox}>
-              <div key={product.id} className={styles.recommendedItems}>
-                <img className={styles.recommendImg} src={product.image} alt={product.name} width={150}/>
-                <div className={styles.recommendedName} style={{ fontSize: '0.8rem' }}>{product.name}</div>
-                <div className={styles.recommendedPrice} style={{ fontSize: '0.7rem', color: 'orangered' }}>{product.price}원</div>
-
-              </div>
-            </div>
-          ))}
+          {recommendedProducts.map(recommendProduct => {
+            return(
+                  <Link
+                    to={`/detail/${recommendProduct.id}`}
+                    // style={{ textDecoration: "none" }}
+                    onClick={()=>{console.log(recommendProduct.id)}}
+                    key={recommendProduct.id} className={styles.recommendBox}
+                  >
+                    <div key={recommendProduct.id} style={{margin: '5px', cursor: 'pointer'}} className={styles.recommendItems}>
+                      <img src={recommendProduct.image} alt={recommendProduct.name} style={{width:150, height:150}}/>
+                      <div style={{ fontSize: '0.8rem', color: 'black', height: '4rem', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '5px' }}>{recommendProduct.name}</div>
+                      <div style={{ fontSize: '0.7rem', color: 'orangered' }}>{recommendProduct.price}원</div>
+                    </div>
+                  </Link>
+              )
+            
+          } )}
         </Slider>
         
         {/* 공유하기 */}

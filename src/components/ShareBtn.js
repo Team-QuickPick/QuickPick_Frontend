@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import kakaoLogo from "../kakao.png";
-import styles from "./ShareBtn.module.scss";
 
+import styles from "./ShareBtn.module.scss";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useScript } from "../hooks/hooks";
 import KakaoShareBtn from "./KakaoShareBtn";
@@ -14,10 +13,10 @@ const ShareBtn = () => {
   const openModalHandler = () => {
     setIsOpen(!isOpen);
   };
-  
+
   //window 객체에서 현재 url 가져오기
   const currentUrl = window.location.href;
-  
+
   // kakao SDK import하기
   const status = useScript("https://developers.kakao.com/sdk/js/kakao.js");
 
@@ -43,6 +42,7 @@ const ShareBtn = () => {
       if (!kakao.isInitialized()) {
         kakao.init(process.env.REACT_APP_KAKAO_KEY);
       }
+
       // Add a container element for the KakaoTalk share button
       const container = document.getElementById("kakaotalk-sharing-btn");
       if (container) {
@@ -59,6 +59,7 @@ const ShareBtn = () => {
               mobileWebUrl: currentUrl,
               webUrl: currentUrl,
             },
+
           },
         });
       };
@@ -69,6 +70,7 @@ const ShareBtn = () => {
   return (
     <div className={styles.shareContainer}>
       <button className={styles.shareBtn} onClick={openModalHandler}>
+
         {isOpen ? "open" : "🔗 공유하기"}
       </button>
       {isOpen ? (
@@ -82,6 +84,7 @@ const ShareBtn = () => {
             id="kakaotalk-sharing-btn"
             >
               <img src={kakaoLogo} alt="kakao icon"></img>
+
             </div>
             <KakaoShareBtn />
             <CopyToClipboard text={currentUrl}>

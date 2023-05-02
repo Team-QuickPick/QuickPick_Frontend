@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import styles from "./Detail.module.scss";
 
-import axios from "axios";
+import axiosInstance from "../utils/axiosConfig";
 import DetailHeader from "../components/DetailHeader";
 import Navbar from "../components/Navbar";
 import ShareBtn from "../components/ShareBtn";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
 
 export default function Detail() {
   const { id } = useParams();
@@ -20,29 +19,29 @@ export default function Detail() {
   useEffect(() => {
     async function getProductData() {
       try {
-        const response = await axios.get(
-          `http://127.0.0.1:8000/api/v1/products/${id}`
-          );
-          const productData = {
-            id: response.data.id,
-            name: response.data.name,
-            price: response.data.price,
-            image: response.data.image,
-            product_category: response.data.product_category,
-            number: response.data.product_number,
-            categoryimage: response.data.product_number[0],
-          };
+        const response = await axiosInstance.get(`products/${id}`);
+        const productData = {
+          id: response.data.id,
+          name: response.data.name,
+          price: response.data.price,
+          image: response.data.image,
+          product_category: response.data.product_category,
+          number: response.data.product_number,
+          categoryimage: response.data.product_number[0],
+        };
         setProduct(productData);
 
         // 검색 결과와 같은 카테고리 상품 가져오기
-        const recommendedResponse = await axios.get(
-          `http://127.0.0.1:8000/api/v1/products/${response.data.product_category}`
-          );
+        const recommendedResponse = await axiosInstance.get(
+          `products/${response.data.product_category}`
+        );
         // 랜덤으로 중복되지 않게 6개 가져오기
+
         if(recommendedResponse.data){
           const recommendedProducts = recommendedResponse.data.filter(product => product.id !== productData.id);
           const shuffledProducts = recommendedProducts.sort(() => 0.5 - Math.random());
           const recommendedProductsSubset = shuffledProducts.slice(0, 15);
+
           setRecommendedProducts(recommendedProductsSubset);
         }
 
@@ -99,6 +98,7 @@ export default function Detail() {
           <h3 className={styles.productPrice}>{product.price}원</h3>
         </div>
 
+
         {/* 추천 상품 자동 슬라이드 */}
         <h3>🎁 같이 찾으시는 상품 🎁</h3>
         <Slider
@@ -118,6 +118,7 @@ export default function Detail() {
                 <img className={styles.recommendImg} src={product.image} alt={product.name} width={150}/>
                 <div className={styles.recommendedName} style={{ fontSize: '0.8rem' }}>{product.name}</div>
                 <div className={styles.recommendedPrice} style={{ fontSize: '0.7rem', color: 'orangered' }}>{product.price}원</div>
+
               </div>
             </div>
           ))}

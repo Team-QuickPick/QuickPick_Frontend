@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+
 import styles from "./SignUp.module.scss";
 import DetailHeader from "../components/DetailHeader";
 import Navbar from "../components/Navbar";
+import axiosInstance from "../utils/axiosConfig";
 
 const SignUp = () => {
   const [username, setUsername] = useState("");
@@ -42,14 +43,11 @@ const SignUp = () => {
     }
 
     try {
-      const response = await axios.post(
-        "http://127.0.0.1:8000/api/v1/users/signup/",
-        {
-          username,
-          email,
-          password,
-        }
-      );
+      const response = await axiosInstance.post("/users/signup/", {
+        username,
+        email,
+        password,
+      });
 
       navigate("/login");
     } catch (error) {

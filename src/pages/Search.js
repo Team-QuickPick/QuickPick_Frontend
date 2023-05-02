@@ -33,6 +33,11 @@ export default function Search() {
       return;
     }
 
+    if (selectedStore === "") {
+      alert("매장을 선택해주세요.");
+      return;
+    }
+
     try {
       const fetchedProducts = await fetchProducts();
       const stores = await fetchStores();

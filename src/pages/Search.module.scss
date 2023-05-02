@@ -4,6 +4,17 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px; // 상품 간격
+  
+}
+
+.productList {
+  // border: 1px solid red;
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  // gap: 10px; /* 상품 간격 */
+  // padding: 10px; /* 좌우 여백 */
 }
 
 .container {
@@ -15,9 +26,11 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  
 }
 
 .content {
+  
   width: 100%;
   max-width: 1200px; // 최대 너비 설정
   height: 100%;

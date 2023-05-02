@@ -1,8 +1,12 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import styles from "./RecentSearches.module.scss";
 
-const RecentSearches = () => {
+const RecentSearches = ({
+  setSearchTerm,
+  onSearchTermChange,
+  onSearchButtonClick,
+}) => {
   const [recentSearches, setRecentSearches] = useState([]);
 
   useEffect(() => {
@@ -12,13 +16,23 @@ const RecentSearches = () => {
     }
   }, []);
 
+  const handleClick = (searchTerm) => {
+    setSearchTerm(searchTerm);
+    onSearchTermChange(searchTerm);
+    // onSearchButtonClick();
+  };
+
   return (
     <div>
       <h4>최근 검색어</h4>
       {recentSearches.length > 0 ? (
         <div className={styles.recentSearchesContainer}>
           {recentSearches.slice(0, 5).map((searchTerm) => (
-            <div key={searchTerm} className={styles.recentSearchItem}>
+            <div
+              key={searchTerm}
+              className={styles.recentSearchItem}
+              onClick={() => handleClick(searchTerm)}
+            >
               {searchTerm}
             </div>
           ))}

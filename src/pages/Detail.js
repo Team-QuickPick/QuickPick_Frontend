@@ -42,7 +42,7 @@ export default function Detail() {
         if(recommendedResponse.data){
           const recommendedProducts = recommendedResponse.data.filter(product => product.id !== productData.id);
           const shuffledProducts = recommendedProducts.sort(() => 0.5 - Math.random());
-          const recommendedProductsSubset = shuffledProducts.slice(0, 6);
+          const recommendedProductsSubset = shuffledProducts.slice(0, 15);
           setRecommendedProducts(recommendedProductsSubset);
         }
 
@@ -84,7 +84,7 @@ export default function Detail() {
       <div className={styles.container}>
         {/* 검색 결과 */}
         <div className={styles.product}>
-          <h3 className={styles.productCategory}>{product.product_category}</h3>
+          <h3 className={styles.productCategory}>💎 {product.product_category} 💎</h3>
           <img
             className={styles.categoryImg}
             src={`/img/detail/${product.categoryimage}.png`}
@@ -100,15 +100,24 @@ export default function Detail() {
         </div>
 
         {/* 추천 상품 자동 슬라이드 */}
-        <Slider dots={false} slidesToShow={2} slidesToScroll={2} autoplay={true} autoplaySpeed={2500}>
+        <h3>🎁 같이 찾으시는 상품 🎁</h3>
+        <Slider
+          dots={false}
+          slidesToShow={2.5}
+          slidesToScroll={1}
+          autoplay={false}
+          draggable={true} // enable dragging
+          touchMove={true} // enable touch movement
+          swipeToSlide={true} // enable swiping to slide
+          infinite={true}
+          className={styles.recommendSlider}
+        >
           {recommendedProducts.map(product => (
-            <div key={product.id}>
-              <div className={styles.recommendBox}>
-                <div key={product.id} className={styles.recommendedItems}>
-                  <img className={styles.recommendImg} src={product.image} alt={product.name} />
-                  <h3>{product.name}</h3>
-                  <h3>{product.price}원</h3>
-                </div>
+            <div key={product.id} className={styles.recommendBox}>
+              <div key={product.id} className={styles.recommendedItems}>
+                <img className={styles.recommendImg} src={product.image} alt={product.name} width={150}/>
+                <div className={styles.recommendedName} style={{ fontSize: '0.8rem' }}>{product.name}</div>
+                <div className={styles.recommendedPrice} style={{ fontSize: '0.7rem', color: 'orangered' }}>{product.price}원</div>
               </div>
             </div>
           ))}

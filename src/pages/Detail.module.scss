@@ -1,6 +1,6 @@
 .container {
   width: 100%;
-  height: 80vh;
+  height: 100%;
   padding: 50px 0;
   text-align: center;
   
@@ -39,17 +39,24 @@
   }
 
   // 추천 상품
-  .recommendContainer{
-    width: 100%;
-    height: auto;
+  .recommendSlider{
+    width: 80%;
+    margin: 0 auto;
 
     .recommendBox{
-      width: 80%;
+      width: 100%;
 
       .recommendItems{
+        width: 100%;
 
         .recommendImg{
-          width: 100px;
+
+        }
+
+        .recommendedName{
+        }
+
+        .recommendedPrice{
         }
       }
     }

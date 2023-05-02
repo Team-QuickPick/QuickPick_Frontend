@@ -39,7 +39,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const fetchPopularProductHandler = async () => {
     try {
-      const result = await axios.get("http://127.0.0.1:8000/api/v1/products/");
+      const result = await axios.get("http://115.85.183.154/api/v1/products/d");
       if (result) {
         // 데이터 랜덤으로 섞기
         const shuffledData = result.data.sort(() => Math.random() - 0.5);

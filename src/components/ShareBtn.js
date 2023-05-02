@@ -4,7 +4,6 @@ import styles from "./ShareBtn.module.scss";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useScript } from "../hooks/hooks";
 import KakaoShareBtn from "./KakaoShareBtn";
-
 // 공유버튼 클릭 => 카카오톡 공유 버튼
 const ShareBtn = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -42,7 +41,6 @@ const ShareBtn = () => {
       if (!kakao.isInitialized()) {
         kakao.init(process.env.REACT_APP_KAKAO_KEY);
       }
-
       // Add a container element for the KakaoTalk share button
       const container = document.getElementById("kakaotalk-sharing-btn");
       if (container) {
@@ -54,37 +52,30 @@ const ShareBtn = () => {
           content: {
             title: "Quick-Pick",
             description: "#화장품 #빨리 #찾기",
-            imageUrl:"https://ifh.cc/g/76JPyh.png",
+            imageUrl: "https://ifh.cc/g/76JPyh.png",
             link: {
               mobileWebUrl: currentUrl,
               webUrl: currentUrl,
             },
-
           },
         });
-      };
+      }
     }
   };
-
 
   return (
     <div className={styles.shareContainer}>
       <button className={styles.shareBtn} onClick={openModalHandler}>
-
         {isOpen ? "open" : "🔗 공유하기"}
       </button>
       {isOpen ? (
-        <div
-        className={styles.modalBackdrop}
-        onClick={openModalHandler}
-        >
-        <div className={styles.modalView} role="dialog">
-            <div 
-            className={styles.kakaoBtn} 
-            id="kakaotalk-sharing-btn"
-            >
-              <img src={kakaoLogo} alt="kakao icon"></img>
-
+        <div className={styles.modalBackdrop} onClick={openModalHandler}>
+          <div className={styles.modalView} role="dialog">
+            <div className={styles.kakaoBtn} id="kakaotalk-sharing-btn">
+              <img
+                src={`${process.env.PUBLIC_URL}/img/kakao.png`}
+                alt="kakao icon"
+              ></img>
             </div>
             <KakaoShareBtn />
             <CopyToClipboard text={currentUrl}>

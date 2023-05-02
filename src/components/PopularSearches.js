@@ -1,7 +1,6 @@
-// PopularSearches.js
 import React, { useState, useEffect } from "react";
 
-import axios from "axios";
+import axiosInstance from "../utils/axiosConfig";
 import styles from "./PopularSearches.module.scss";
 
 const PopularSearches = ({ onSearchTermChange, onSearchButtonClick }) => {
@@ -10,9 +9,7 @@ const PopularSearches = ({ onSearchTermChange, onSearchButtonClick }) => {
   useEffect(() => {
     const getPopularSearches = async () => {
       try {
-        const response = await axios.get(
-          "http://127.0.0.1:8000/api/v1/products/popular/"
-        );
+        const response = await axiosInstance.get("/products/popular/");
         setPopularSearches(response.data);
       } catch (error) {
         console.error(error);

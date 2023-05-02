@@ -8,8 +8,10 @@ const SearchBar = ({
   onSearchTermChange,
   onSearchButtonClick,
   resetInput,
+  searchTerm,
 }) => {
-  const [searchTerm, setSearchTerm] = useState("");
+  // const [searchTerm, setSearchTerm] = useState("");
+  const [inputValue, setInputValue] = useState("");
   const [stores, setStores] = useState([]);
   const [selectedStore, setSelectedStore] = useState("");
 
@@ -23,13 +25,17 @@ const SearchBar = ({
 
   useEffect(() => {
     if (resetInput) {
-      setSearchTerm("");
+      setInputValue("");
     }
   }, [resetInput]);
 
+  useEffect(() => {
+    setInputValue(searchTerm); // Add this useEffect
+  }, [searchTerm]);
+
   // 검색어 변경
   const handleChange = (event) => {
-    setSearchTerm(event.target.value);
+    setInputValue(event.target.value);
     onSearchTermChange(event.target.value);
   };
 
@@ -59,7 +65,7 @@ const SearchBar = ({
         <input
           type="text"
           placeholder="검색어를 입력하세요"
-          value={searchTerm}
+          value={inputValue}
           onChange={handleChange}
         />
         <button type="submit">Search</button>

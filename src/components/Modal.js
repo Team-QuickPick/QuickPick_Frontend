@@ -1,20 +1,20 @@
+import React, { useEffect, useState } from "react";
+
 import styles from "./Modal.module.scss";
-import React, { useEffect, useRef, useState } from "react";
-import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import axiosInstance from "../utils/axiosConfig";
 
 const Modal = ({ showModal, setShowModal, renderItem }) => {
   const { pk, name, price, image, product_location } = renderItem;
-  //ex) product_location = [1, 2];
-  // storeList = [{pk: 1, name: '올리브영 오즈점', branch: '서울 서초구'}, {}, {}...]
+
   const [storeList, setStoreList] = useState([]);
   const [persistStoreList, setPersistStoreList] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const fetchStoreHandler = async () => {
     try {
-      const result = await axios.get("http://127.0.0.1:8000/api/v1/stores/");
+      const result = await axiosInstance.get("/stores/");
       if (result) {
         setStoreList(result.data);
         setLoading(false);
@@ -23,17 +23,18 @@ const Modal = ({ showModal, setShowModal, renderItem }) => {
       console.log("올리브영 지점 데이터 조회 실패", error.message);
     }
   };
+
   useEffect(() => {
     setLoading(true);
     fetchStoreHandler();
     setLoading(false);
   }, []);
+
   useEffect(() => {
     if ("product_location" in renderItem) {
       const filterdArray = storeList.filter((store, index) =>
         product_location.includes(store.pk)
       );
-      console.log("filterdArray-------", filterdArray);
       setPersistStoreList(filterdArray);
     }
   }, [renderItem]);
@@ -52,7 +53,6 @@ const Modal = ({ showModal, setShowModal, renderItem }) => {
                 key={`${store.branch}${store.name}${index}`}
               >
                 <div>{store.name}</div>
-                {/* <p>{store.branch}</p> */}
               </div>
             );
           })}

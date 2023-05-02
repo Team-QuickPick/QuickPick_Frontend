@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import kakaoLogo from "../kakao.png";
-import styles from "./ShareBtn.module.scss";
 
+import styles from "./ShareBtn.module.scss";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useScript } from "../hooks/hooks";
 import KakaoShareBtn from "./KakaoShareBtn";
@@ -14,10 +13,10 @@ const ShareBtn = () => {
   const openModalHandler = () => {
     setIsOpen(!isOpen);
   };
-  
+
   //window 객체에서 현재 url 가져오기
   const currentUrl = window.location.href;
-  
+
   // kakao SDK import하기
   const status = useScript("https://developers.kakao.com/sdk/js/kakao.js");
 

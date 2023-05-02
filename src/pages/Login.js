@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+
 import styles from "./Login.module.scss";
 import DetailHeader from "../components/DetailHeader";
 import Navbar from "../components/Navbar";
+import axiosInstance from "../utils/axiosConfig";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -15,13 +16,10 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        "http://127.0.0.1:8000/api/v1/users/login/",
-        {
-          email,
-          password,
-        }
-      );
+      const response = await axiosInstance.post("users/login/", {
+        email,
+        password,
+      });
       const { refresh, access } = response.data;
       localStorage.setItem("refresh", refresh);
       localStorage.setItem("access", access);

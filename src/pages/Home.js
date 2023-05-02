@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
+
 import styles from "./Home.module.scss";
 import Navbar from "../components/Navbar";
 import HomeHeader from "../components/HomeHeader";
-import axios from "axios";
 import Modal from "../components/Modal";
+import axiosInstance from "../utils/axiosConfig";
 
 export default function Home() {
   // 광고 캐러셀
@@ -39,8 +40,10 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const fetchPopularProductHandler = async () => {
     try {
-      const result = await axios.get("http://127.0.0.1:8000/api/v1/products/");
+      const result = await axiosInstance.get(`products/`);
+      // console.log(result);
       if (result) {
+        // setPopularProductList(result.data);
         // 데이터 랜덤으로 섞기
         const shuffledData = result.data.sort(() => Math.random() - 0.5);
         setPopularProductList(shuffledData);

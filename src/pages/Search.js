@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { useEffect } from "react";
+
 import styles from "./Search.module.scss";
 import Navbar from "../components/Navbar";
 import SearchBar from "../components/SearchBar";
@@ -87,9 +88,9 @@ export default function Search() {
           onStoreSelect={handleStoreSelect}
           onSearchTermChange={handleSearchTermChange}
           onSearchButtonClick={handleSearch}
-          onResetSearch={resetSearch} // Pass resetSearch function as a prop
-          selectedStore={selectedStore} // Pass selectedStore as a prop
-          searchTerm={searchTerm} // Pass searchTerm as a prop
+          onResetSearch={resetSearch}
+          selectedStore={selectedStore}
+          searchTerm={searchTerm}
         />
         <div className={styles.searchResultsCount}>
           {searchResults.length > 0

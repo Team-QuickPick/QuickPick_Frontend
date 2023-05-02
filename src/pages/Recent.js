@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import styles from "./Recent.module.scss";
 import Navbar from "../components/Navbar";
 import DetailHeader from "../components/DetailHeader";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 export default function Recent() {
   const [recentProducts, setRecentProducts] = useState([]);
@@ -58,7 +60,13 @@ export default function Recent() {
             ))}
           </div>
         ) : (
-          <div className={styles.noProducts}>최근 본 상품이 없습니다.</div>
+          <div className={styles.noProducts}>
+            최근 본 상품이 없습니다.
+            <Link to="/search" className={styles.searchButton}>
+              <FontAwesomeIcon icon={faSearch} />
+              검색하러 가기
+            </Link>
+          </div>
         )}
       </div>
       <Navbar />

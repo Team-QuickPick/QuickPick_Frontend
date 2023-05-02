@@ -11,10 +11,12 @@ import SignUp from "./pages/SignUp";
 
 import SideButton from "./components/SideButton";
 import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
     <Router>
+      <ScrollToTop /> {/* 추가 */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />

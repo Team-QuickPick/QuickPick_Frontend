@@ -18,7 +18,7 @@ export default function Home() {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveSlide((prevSlide) => (prevSlide + 1) % 3);
-    }, 3000);
+    }, 2000);
     return () => clearInterval(interval);
   }, []);
   useEffect(() => {
@@ -40,9 +40,7 @@ export default function Home() {
   const fetchPopularProductHandler = async () => {
     try {
       const result = await axios.get("http://127.0.0.1:8000/api/v1/products/");
-      // console.log(result);
       if (result) {
-        // setPopularProductList(result.data);
         // 데이터 랜덤으로 섞기
         const shuffledData = result.data.sort(() => Math.random() - 0.5);
         setPopularProductList(shuffledData);

@@ -36,10 +36,12 @@ export default function Detail() {
           `products/${response.data.product_category}`
         );
         // 랜덤으로 중복되지 않게 6개 가져오기
+
         if(recommendedResponse.data){
           const recommendedProducts = recommendedResponse.data.filter(product => product.id !== productData.id);
           const shuffledProducts = recommendedProducts.sort(() => 0.5 - Math.random());
           const recommendedProductsSubset = shuffledProducts.slice(0, 15);
+
           setRecommendedProducts(recommendedProductsSubset);
         }
 
@@ -96,6 +98,7 @@ export default function Detail() {
           <h3 className={styles.productPrice}>{product.price}원</h3>
         </div>
 
+
         {/* 추천 상품 자동 슬라이드 */}
         <h3>🎁 같이 찾으시는 상품 🎁</h3>
         <Slider
@@ -115,6 +118,7 @@ export default function Detail() {
                 <img className={styles.recommendImg} src={product.image} alt={product.name} width={150}/>
                 <div className={styles.recommendedName} style={{ fontSize: '0.8rem' }}>{product.name}</div>
                 <div className={styles.recommendedPrice} style={{ fontSize: '0.7rem', color: 'orangered' }}>{product.price}원</div>
+
               </div>
             </div>
           ))}

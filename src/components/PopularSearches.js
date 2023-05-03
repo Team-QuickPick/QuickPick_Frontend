@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import axiosInstance from "../utils/axiosConfig";
 import styles from "./PopularSearches.module.scss";
+import { Link } from "react-router-dom";
 
 const PopularSearches = ({ onSearchTermChange, onSearchButtonClick }) => {
   const [popularSearches, setPopularSearches] = useState([]);

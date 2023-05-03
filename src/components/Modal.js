@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import styles from "./Modal.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -42,9 +43,14 @@ const Modal = ({ showModal, setShowModal, renderItem }) => {
   return (
     <div className={showModal ? styles.modalBackdrop : styles.modalHidden}>
       <div className={styles.modalContent}>
-        <img className={styles.img} src={image} />
-        <div className={styles.name}>{name}</div>
-        <div className={styles.price}>{price}원</div>
+        <Link
+          to={{pathname: `/detail/${pk}`}}
+          style={{ textDecoration: "none" }}
+        >
+          <img className={styles.img} src={image} />
+          <div className={styles.name}>{name}</div>
+          <div className={styles.price}>{price}원</div>
+        </Link>  
         <div>
           {persistStoreList.map((store, index) => {
             return (
@@ -58,7 +64,7 @@ const Modal = ({ showModal, setShowModal, renderItem }) => {
           })}
         </div>
         <button onClick={() => setShowModal(false)} className={styles.btn}>
-          <FontAwesomeIcon icon={faXmark} size="lg" color="#3B28CC" />
+          <FontAwesomeIcon icon={faXmark} size="lg"  color="#3B28CC" />
         </button>
       </div>
     </div>

@@ -34,7 +34,7 @@ export default function Recent() {
     <>
       <DetailHeader />
       <div className={styles.container}>
-        <h4>최근 본 상품</h4>
+        <h2>🔍 최근 본 상품 🔍</h2>
         {recentProducts.length > 0 ? (
           <div className={styles.productList}>
             {recentProducts.map((product) => (
@@ -65,7 +65,7 @@ export default function Recent() {
             최근 본 상품이 없습니다.
             <Link to="/search" className={styles.searchButton}>
               <FontAwesomeIcon icon={faSearch} />
-              검색하러 가기
+              {" "}검색하러 가기
             </Link>
           </div>
         )}

@@ -22,6 +22,7 @@
     padding: 20px;
     border-radius: 10px;
     text-align: center;
+    cursor: pointer;
 }
 
 .img{
@@ -36,6 +37,7 @@
     overflow: auto;
     font-size: 1.1em;
     font-weight: bold;
+    color: black;
 }
 
 .price{
@@ -54,6 +56,7 @@
     border: transparent;
     text-align: right;
     margin: 0;
+    font-size: 18px;
     cursor: pointer;
 }
 

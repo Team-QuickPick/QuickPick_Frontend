@@ -18,16 +18,23 @@ const PopularSearches = ({ onSearchTermChange, onSearchButtonClick }) => {
     };
     getPopularSearches();
   }, []);
-
+  
   return (
     <div className={styles.container}>
       <h4>🔥QuickPick's 실시간 랭킹🔥</h4>
       {popularSearches.length > 0 ? (
         <div className={styles.popularSearchesContainer}>
           {popularSearches.map((product) => (
-            <div key={product.id} className={styles.popularSearchItem}>
-              {product.name}
-            </div>
+            <Link
+            to={`/detail/${product.id}`}
+            style={{ textDecoration: "none" }}
+            >
+              <div 
+              key={product.id} 
+              className={styles.popularSearchItem}>
+                {product.name}
+              </div>
+            </Link>
           ))}
         </div>
       ) : (

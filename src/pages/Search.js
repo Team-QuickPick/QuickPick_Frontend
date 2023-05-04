@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { useEffect } from "react";
-
+import { useQuery } from "react-query";
 import styles from "./Search.module.scss";
 import Navbar from "../components/Navbar";
 import SearchBar from "../components/SearchBar";
@@ -11,13 +10,14 @@ import PopularSearches from "../components/PopularSearches";
 import DetailHeader from "../components/DetailHeader";
 
 export default function Search() {
-  const [products, setProducts] = useState([]); // products 변수 선언
-
   const [searchResults, setSearchResults] = useState([]);
   const [searchPerformed, setSearchPerformed] = useState(false);
 
   const [selectedStore, setSelectedStore] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+
+  const productsQuery = useQuery("products", fetchProducts);
+  const storesQuery = useQuery("stores", fetchStores);
 
   const handleStoreSelect = useCallback((storeName) => {
     setSelectedStore(storeName);
@@ -27,7 +27,7 @@ export default function Search() {
     setSearchTerm(term);
   }, []);
 
-  const handleSearch = useCallback(async () => {
+  const handleSearch = useCallback(() => {
     if (searchTerm.trim() === "") {
       alert("검색어를 입력해주세요.");
       return;
@@ -38,41 +38,33 @@ export default function Search() {
       return;
     }
 
-    try {
-      const fetchedProducts = await fetchProducts();
-      const stores = await fetchStores();
-      const selectedStorePk = stores.find(
-        (store) => store.name === selectedStore
-      )?.pk;
+    const fetchedProducts = productsQuery.data;
+    const stores = storesQuery.data;
+    const selectedStorePk = stores.find(
+      (store) => store.name === selectedStore
+    )?.pk;
 
-      const filteredProducts = fetchedProducts.filter((product) => {
-        const productName = product.name.toLowerCase();
-        const searchTermLowerCase = searchTerm.toLowerCase();
-        return (
-          productName.includes(searchTermLowerCase) &&
-          (selectedStorePk === "" ||
-            product.product_location.includes(selectedStorePk))
-        );
-      });
-
-      const recentSearches = JSON.parse(
-        localStorage.getItem("recentSearches") || "[]"
+    const filteredProducts = fetchedProducts.filter((product) => {
+      const productName = product.name.toLowerCase();
+      const searchTermLowerCase = searchTerm.toLowerCase();
+      return (
+        productName.includes(searchTermLowerCase) &&
+        (selectedStorePk === "" ||
+          product.product_location.includes(selectedStorePk))
       );
-      localStorage.setItem(
-        "recentSearches",
-        JSON.stringify(
-          [...new Set([searchTerm, ...recentSearches])].slice(0, 5)
-        )
-      );
+    });
 
-      setProducts(fetchedProducts); // products 변수에 값을 할당
-      setSearchResults(filteredProducts);
-      setSearchPerformed(true);
-    } catch (error) {
-      console.error(error);
-      alert("상품 정보를 가져오는 중 오류가 발생했습니다.");
-    }
-  }, [searchTerm, selectedStore]);
+    const recentSearches = JSON.parse(
+      localStorage.getItem("recentSearches") || "[]"
+    );
+    localStorage.setItem(
+      "recentSearches",
+      JSON.stringify([...new Set([searchTerm, ...recentSearches])].slice(0, 5))
+    );
+
+    setSearchResults(filteredProducts);
+    setSearchPerformed(true);
+  }, [searchTerm, selectedStore, productsQuery.data, storesQuery.data]);
 
   const resetSearch = useCallback(() => {
     setSelectedStore("");
@@ -80,11 +72,10 @@ export default function Search() {
     setSearchPerformed(false);
   }, []);
 
-  useEffect(() => {
-    if (localStorage.getItem("recentSearches") === null) {
-      localStorage.setItem("recentSearches", JSON.stringify([]));
-    }
-  }, []);
+  if (productsQuery.isError || storesQuery.isError) {
+    return <div>상품 정보를 가져오는 중 오류가 발생했습니다.</div>;
+  }
+
   return (
     <>
       <DetailHeader />

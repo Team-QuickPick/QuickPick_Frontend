@@ -1,70 +1,72 @@
-# Getting Started with Create React App
+# Quick Pick
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 개발 기간 및 인원
 
-## Available Scripts
+- 개발 기간 : 2023/04/03 ~ 2023/05/03 (30일)
+- 개발 인원 : 프론트엔드 2명, 백엔드 1명
+  - 프론트엔드: 김지영, 이다경
+  - 백엔드: 김보민
+- [백엔드 github 링크](https://github.com/Team-QuickPick/QuickPick_Backend)
 
-In the project directory, you can run:
+## 프로젝트 선정이유
 
-### `npm start`
+- 필요한 상품을 검색해서 위치를 찾는 서비스입니다.
+- 실생활의 개선 사항을 반영하여 직원이 없어도 상품을 찾을 수 있는 서비스를 만들고자 했습니다.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 배포 주소
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+[myquickpick.site](myquickpick.site)
 
-### `npm test`
+## 설치방법
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+git clone https://github.com/Team-QuickPick/QuickPick_Frontend.git
+cd QuickPick_Frontend
+npm install
+npm run start
+```
 
-### `npm run build`
+## 적용 기술 및 구현 기능
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 적용 기술
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### Front-End
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![sass](https://img.shields.io/badge/sass-CC6699?style=for-the-badge&logo=sass&logoColor=white)
 
-### `npm run eject`
+#### Back-End
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Common
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+![Slack](https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white)
+![github](https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white)
+![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#### Deploy
 
-## Learn More
+![netlify](https://img.shields.io/badge/netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white)
+![naver](https://img.shields.io/badge/naver-03C75A?style=for-the-badge&logo=naver&logoColor=white)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 구현 기능
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- 메인 페이지<br><br>
+  ![01-메인](https://github.com/Team-QuickPick/QuickPick_Frontend/assets/118751359/2b9997c3-b85d-4543-be27-3f1371c66b20)
 
-### Code Splitting
+- 상세 페이지<br><br>
+  ![02-상세](https://github.com/Team-QuickPick/QuickPick_Frontend/assets/118751359/cc0a3ad2-a046-48a9-bcd0-f4fd7104d411)
+- 카카오 공유하기<br>
+  ![03-공유](https://github.com/Team-QuickPick/QuickPick_Frontend/assets/118751359/00967c82-73e2-4f2e-9603-fcd6554fc4bd)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- 검색 페이지<br><br>
+  ![04-검색](https://github.com/Team-QuickPick/QuickPick_Frontend/assets/118751359/e62f46d5-d5ed-4071-982c-2c8a19589316)
 
-### Analyzing the Bundle Size
+- 로그인&회원가입 페이지<br>
+  ![05-로그인](https://github.com/Team-QuickPick/QuickPick_Frontend/assets/118751359/595e9bb8-e420-4443-b092-278eee511221)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- 이메일 중복검사<br>
+  ![06-이메일](https://github.com/Team-QuickPick/QuickPick_Frontend/assets/118751359/26fe3b2b-3d57-46d6-9193-03015bc58c7d)

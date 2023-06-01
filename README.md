@@ -15,7 +15,7 @@
 
 ## 배포 주소
 
-[myquickpick.site](myquickpick.site)
+[myquickpick.site](https://myquickpick.site/)
 
 ## 설치방법
 
